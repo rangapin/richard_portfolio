@@ -1,5 +1,5 @@
 ---
-title: Laracast for PHP artisans.
+title: Laracast - The Learning Platform for PHP Artisan
 date: '2022-12-26'
 tags: ['PHP', 'OOP', 'Laravel', 'Laracast', 'Vue', 'Inertia']
 draft: false
