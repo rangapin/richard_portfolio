@@ -1,6 +1,6 @@
 ---
 title: Why did I chose Laravel?
-date: '2022-12-18'
+date: '2022-12-10'
 tags: ['lavarel', 'php', 'framework']
 draft: false
 summary: 'Laravel is a popular open-source PHP framework that is widely used for web application development.'

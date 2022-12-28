@@ -19,4 +19,4 @@ Currently, I am sharpening my tool kit and learning about this ancient language 
 
 When I am not brainstorming back-end applications or designing websites, I love to spend my time Freediving in the most beautiful destinations on the planet.
 
-Let’s connect and dive into your next project together!
+Let’s dive into your next project together!

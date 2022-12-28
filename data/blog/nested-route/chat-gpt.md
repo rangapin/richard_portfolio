@@ -1,6 +1,6 @@
 ---
 title: What is ChatGPT?
-date: '2022-12-20'
+date: '2022-12-17'
 tags: ['AI', 'chat', 'bot']
 draft: false
 summary: ChatGPT is a natural language processing (NLP) model developed by OpenAI.
