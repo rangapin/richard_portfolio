@@ -1,5 +1,5 @@
 ---
-title: List of error messages I faced and solved
+title: List of error messages I solved
 date: '2022-12-30'
 tags: ['error', 'message', 'google']
 draft: false
