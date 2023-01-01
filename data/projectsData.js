@@ -7,7 +7,7 @@ const projectsData = [
   },
   {
     title: 'Online CV',
-    description: `This landing page designed with Tailwind CSS.`,
+    description: `This landing page was designed with Tailwind CSS. New projects are coming soon but in the meantime, feel free to check my CV.`,
     imgSrc: '/static/images/mycv.png',
     href: 'https://tailwind-starter-azure.vercel.app/',
   },
