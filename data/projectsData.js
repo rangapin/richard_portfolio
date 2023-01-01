@@ -6,10 +6,10 @@ const projectsData = [
     href: '/blog/freediving-school',
   },
   {
-    title: 'Cocktails Creole',
-    description: `Pick up a quick recipe for a nice homemade cocktail tonight.`,
-    imgSrc: '/static/images/cocktails-c.png',
-    href: 'https://cocktailscreole.vercel.app/',
+    title: 'Online CV',
+    description: `This landing page designed with Tailwind CSS.`,
+    imgSrc: '/static/images/mycv.png',
+    href: 'https://tailwind-starter-azure.vercel.app/',
   },
 ]
 
