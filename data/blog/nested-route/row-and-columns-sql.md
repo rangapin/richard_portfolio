@@ -2,7 +2,7 @@
 title: What is the difference between a column and a row in SQL?
 date: '2023-01-02'
 tags: ['sql', 'row', 'column', 'interview-questions']
-draft: true
+draft: false
 summary: I was asked this question during a recent interview with HR.
 ---
 
