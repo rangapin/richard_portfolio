@@ -2,7 +2,7 @@
 title: What is the difference between a for loop and a while loop?
 date: '2023-01-02'
 tags: ['loop', 'code', 'programming', 'basic']
-draft: false
+draft: true
 summary: In PHP, a for loop is a control flow statement that allows you to execute a block of code a certain number of times.
 ---
 
