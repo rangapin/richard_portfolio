@@ -6,6 +6,8 @@ draft: true
 summary: In PHP, a for loop is a control flow statement that allows you to execute a block of code a certain number of times.
 ---
 
+A loop is a control structure in programming that allows a block of code to be executed repeatedly. Loops are an important tool in programming, as they allow you to perform a task multiple times without having to write the same code over and over again. They can also be used to perform tasks that involve repeating actions, such as searching through data or processing user input. They include:
+
 ## For Loop
 
 The for loop has the following syntax:
