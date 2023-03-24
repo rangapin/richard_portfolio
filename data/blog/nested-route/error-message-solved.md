@@ -14,10 +14,8 @@ Thank you Github! I solved this issue by downgrading the package using the comma
 sudo apt-get install libpcre3=2:8.39-13ubuntu0.22.04.1
 ```
 
-## @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+## WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
 
-@ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
 Someone could be eavesdropping on you right now (man-in-the-middle attack)!
 It is also possible that a host key has just been changed.
