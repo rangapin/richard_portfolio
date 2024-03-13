@@ -13,9 +13,15 @@ const projectsData = [
   },
   {
     title: 'Blog card',
-    description: `This design piece was build using frontendmentor.io`,
+    description: `This design piece was built using frontendmentor.io`,
     imgSrc: '/static/images/blog-card.png',
     href: 'https://blog-card-main-ee1p8qxks-rangapin.vercel.app/',
+  },
+  {
+    title: 'Recipe page',
+    description: `This design piece was built using frontendmentor.io`,
+    imgSrc: '/static/images/recipe.png',
+    href: 'https://recipe-page-main-gamma.vercel.app/',
   },
 ]
 
