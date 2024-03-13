@@ -1,6 +1,6 @@
 ---
 title: Is PHP Dead??
-date: '2022-11-30'
+date: '2023-11-30'
 tags: ['programming', 'php', 'native']
 draft: false
 summary: 'There has been a lot of debate in the developer community about whether PHP, a popular programming language used for web development, is dead or still alive and relevant.'

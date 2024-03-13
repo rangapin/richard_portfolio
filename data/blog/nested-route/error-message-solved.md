@@ -1,6 +1,6 @@
 ---
 title: List of error messages I solved
-date: '2022-12-30'
+date: '2023-12-30'
 tags: ['error', 'message', 'google']
 draft: false
 summary: This is a list of error messages I solved

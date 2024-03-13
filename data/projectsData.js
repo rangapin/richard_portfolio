@@ -5,12 +5,12 @@ const projectsData = [
     imgSrc: '/static/images/main-free.png',
     href: '/blog/freediving-school',
   },
-  {
-    title: 'Online CV',
-    description: `This landing page was designed with Tailwind CSS. New projects are coming soon but in the meantime, feel free to check my CV.`,
-    imgSrc: '/static/images/mycv.png',
-    href: 'https://tailwind-starter-azure.vercel.app/',
-  },
+  /*   {
+    title: 'Random Quotes',
+    description: `The Random Quotes project is a simple web application that generates and displays random quotes to the user. The application is built using HTML, CSS, and PHP, providing an elegant and minimalistic user interface.`,
+    imgSrc: '/static/images/quotes.png',
+    href: 'https://recipe-page-main-gamma.vercel.app/',
+  }, */
   {
     title: 'Blog card',
     description: `This design piece was built using frontendmentor.io`,

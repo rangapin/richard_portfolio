@@ -1,6 +1,6 @@
 ---
 title: A list of Youtube channels for programmers.
-date: '2022-11-13'
+date: '2023-11-13'
 tags: ['youtube', 'programming', 'tutorial']
 draft: false
 summary: 'There are many YouTube channels that are dedicated to programming and are a great resource for developers of all levels.'

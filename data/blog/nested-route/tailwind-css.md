@@ -1,6 +1,6 @@
 ---
 title: What the heck is Tailwind CSS?
-date: '2022-11-05'
+date: '2023-11-05'
 tags: ['tailwind', 'css', 'TALL', 'front-end']
 draft: false
 summary: 'Tailwind CSS is a utility-based CSS framework that is designed to make it easy for developers to build and style modern web applications.'

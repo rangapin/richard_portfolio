@@ -1,6 +1,6 @@
 ---
 title: 10 Tips for self-taught developers.
-date: '2022-11-16'
+date: '2023-11-16'
 tags: ['self-taught', 'junior', 'programming']
 draft: false
 summary: 'Web development can be hard but does it have to be? Here are my 10 tips for self-taught web developers.'

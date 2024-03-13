@@ -1,8 +1,8 @@
 ---
 title: Laracast - The Learning Platform for PHP Artisan
-date: '2022-12-26'
+date: '2023-12-26'
 tags: ['PHP', 'OOP', 'Laravel', 'Laracast', 'Vue', 'Inertia']
-draft: false
+draft: true
 summary: Laracast is a popular platform for learning and improving web development skills. .
 ---
 

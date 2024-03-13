@@ -1,6 +1,6 @@
 ---
 title: Programming as a Hobby
-date: '2022-12-25'
+date: '2023-12-25'
 tags: ['hobby', 'programming']
 draft: false
 summary: 'Programming as a hobby can be a rewarding and enjoyable experience, even if it is not your primary source of income.'
