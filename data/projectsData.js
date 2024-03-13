@@ -11,6 +11,12 @@ const projectsData = [
     imgSrc: '/static/images/mycv.png',
     href: 'https://tailwind-starter-azure.vercel.app/',
   },
+  {
+    title: 'Blog card',
+    description: `This design piece was build using frontendmentor.io`,
+    imgSrc: '/static/images/blog-card.png',
+    href: 'https://blog-card-main-ee1p8qxks-rangapin.vercel.app/',
+  },
 ]
 
 export default projectsData
