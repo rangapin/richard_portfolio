@@ -2,7 +2,7 @@ const projectsData = [
   {
     title: 'Rapid Coins',
     description: `This Cryptocurrency Price Tracker is a simple web application designed to provide real-time price updates for various cryptocurrencies. Built with PHP and cURL, this app fetches data from an external API and displays key information such as the name, symbol, and current price of each cryptocurrency. `,
-    imgSrc: '/static/images/67.png',
+    imgSrc: '/static/images/cnbc.png',
     href: 'https://api.richardangapin.xyz/',
     // href: '/blog/freediving-school',
   },
