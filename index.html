@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-Bit Mosquito Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Courier New', monospace;
+            color: #fff;
+        }
+        
+        #game-container {
+            position: relative;
+            width: 512px;
+            height: 480px;
+            border: 4px solid #444;
+            overflow: hidden;
+        }
+        
+        #game-canvas {
+            background-color: #000022;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+        
+        #game-ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 16px;
+            color: #ff6666;
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        #start-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 34, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        
+        #start-screen h1 {
+            color: #ff6666;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 3px 3px 0 #000;
+        }
+        
+        #start-screen p {
+            color: #aaaaff;
+            font-size: 16px;
+            margin: 10px 0;
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        #start-btn {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            background-color: #ff6666;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            border: 3px solid #fff;
+        }
+        
+        #start-btn:hover {
+            background-color: #ff8888;
+        }
+        
+        #game-over {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 34, 0.85);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        
+        #game-over h1 {
+            color: #ff6666;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 #000;
+        }
+        
+        #game-over p {
+            color: #aaaaff;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        
+        #retry-btn {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            background-color: #ff6666;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            border: 3px solid #fff;
+        }
+        
+        #retry-btn:hover {
+            background-color: #ff8888;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas" width="512" height="480"></canvas>
+        <div id="game-ui">BLOOD: 0 | LEVEL: 1</div>
+        
+        <div id="start-screen">
+            <h1>MOSQUITO QUEST</h1>
+            <p>You're a hungry mosquito looking for blood!</p>
+            <p>Use ARROW KEYS to fly around</p>
+            <p>Collect red blood drops for points</p>
+            <p>Avoid fly swatters and bug spray clouds</p>
+            <button id="start-btn">START GAME</button>
+        </div>
+        
+        <div id="game-over">
+            <h1>GAME OVER</h1>
+            <p>Your mosquito has been squashed!</p>
+            <p id="final-score">BLOOD COLLECTED: 0</p>
+            <button id="retry-btn">TRY AGAIN</button>
+        </div>
+    </div>
+
+    <script>
+        // Game variables
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        const gameUI = document.getElementById('game-ui');
+        const startScreen = document.getElementById('start-screen');
+        const gameOverScreen = document.getElementById('game-over');
+        const startBtn = document.getElementById('start-btn');
+        const retryBtn = document.getElementById('retry-btn');
+        const finalScoreEl = document.getElementById('final-score');
+        
+        let gameActive = false;
+        let bloodCount = 0;
+        let level = 1;
+        let gameSpeed = 1;
+        
+        // Mosquito variables
+        const mosquito = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            width: 16,
+            height: 16,
+            speed: 4,
+            dx: 0,
+            dy: 0,
+            color: '#ff6666'
+        };
+        
+        // Blood drops
+        const bloodDrops = [];
+        const maxBloodDrops = 5;
+        
+        // Obstacles
+        const obstacles = [];
+        const maxObstacles = 3;
+        
+        // Control state
+        const keys = {
+            ArrowUp: false,
+            ArrowDown: false,
+            ArrowLeft: false,
+            ArrowRight: false
+        };
+        
+        // Event listeners
+        startBtn.addEventListener('click', startGame);
+        retryBtn.addEventListener('click', restartGame);
+        
+        document.addEventListener('keydown', (e) => {
+            if (keys.hasOwnProperty(e.key)) {
+                keys[e.key] = true;
+            }
+        });
+        
+        document.addEventListener('keyup', (e) => {
+            if (keys.hasOwnProperty(e.key)) {
+                keys[e.key] = false;
+            }
+        });
+        
+        // Game functions
+        function startGame() {
+            gameActive = true;
+            startScreen.style.display = 'none';
+            gameLoop();
+            
+            // Initialize game elements
+            spawnBloodDrops();
+            setTimeout(spawnObstacles, 3000); // Give player a few seconds before obstacles appear
+        }
+        
+        function restartGame() {
+            bloodCount = 0;
+            level = 1;
+            gameSpeed = 1;
+            mosquito.x = canvas.width / 2;
+            mosquito.y = canvas.height / 2;
+            mosquito.dx = 0;
+            mosquito.dy = 0;
+            bloodDrops.length = 0;
+            obstacles.length = 0;
+            
+            gameOverScreen.style.display = 'none';
+            gameActive = true;
+            
+            updateUI();
+            spawnBloodDrops();
+            setTimeout(spawnObstacles, 3000);
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function gameLoop() {
+            if (!gameActive) return;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Update game state
+            updateMosquito();
+            updateBloodDrops();
+            updateObstacles();
+            
+            // Check collisions
+            checkCollisions();
+            
+            // Draw everything
+            drawGame();
+            
+            // Continue loop
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function updateMosquito() {
+            // Handle movement based on keys
+            mosquito.dx = 0;
+            mosquito.dy = 0;
+            
+            if (keys.ArrowLeft) mosquito.dx = -mosquito.speed;
+            if (keys.ArrowRight) mosquito.dx = mosquito.speed;
+            if (keys.ArrowUp) mosquito.dy = -mosquito.speed;
+            if (keys.ArrowDown) mosquito.dy = mosquito.speed;
+            
+            // Update position
+            mosquito.x += mosquito.dx;
+            mosquito.y += mosquito.dy;
+            
+            // Keep mosquito within bounds
+            if (mosquito.x < 0) mosquito.x = 0;
+            if (mosquito.x > canvas.width - mosquito.width) mosquito.x = canvas.width - mosquito.width;
+            if (mosquito.y < 0) mosquito.y = 0;
+            if (mosquito.y > canvas.height - mosquito.height) mosquito.y = canvas.height - mosquito.height;
+        }
+        
+        function spawnBloodDrops() {
+            if (!gameActive) return;
+            
+            while (bloodDrops.length < maxBloodDrops) {
+                bloodDrops.push({
+                    x: Math.random() * (canvas.width - 12),
+                    y: Math.random() * (canvas.height - 12),
+                    width: 12,
+                    height: 12,
+                    color: '#ff0000',
+                    value: 1
+                });
+            }
+        }
+        
+        function updateBloodDrops() {
+            // No movement for blood drops in this simple version
+        }
+        
+        function spawnObstacles() {
+            if (!gameActive) return;
+            
+            while (obstacles.length < maxObstacles * level / 2) {
+                // Create either a flyswatter or bug spray cloud
+                const type = Math.random() > 0.5 ? 'swatter' : 'spray';
+                
+                let obstacle = {
+                    x: 0,
+                    y: 0,
+                    width: type === 'swatter' ? 32 : 48,
+                    height: type === 'swatter' ? 32 : 48,
+                    type: type,
+                    speed: 2 + Math.random() * 2 * gameSpeed,
+                    direction: Math.random() * Math.PI * 2,
+                    color: type === 'swatter' ? '#aaaaaa' : '#88ff88'
+                };
+                
+                // Position obstacles away from the player
+                do {
+                    obstacle.x = Math.random() * (canvas.width - obstacle.width);
+                    obstacle.y = Math.random() * (canvas.height - obstacle.height);
+                } while (
+                    Math.abs(obstacle.x - mosquito.x) < 100 && 
+                    Math.abs(obstacle.y - mosquito.y) < 100
+                );
+                
+                obstacles.push(obstacle);
+            }
+            
+            // Schedule next spawn
+            setTimeout(spawnObstacles, 3000 / gameSpeed);
+        }
+        
+        function updateObstacles() {
+            for (let i = 0; i < obstacles.length; i++) {
+                const obstacle = obstacles[i];
+                
+                // Move in current direction
+                obstacle.x += Math.cos(obstacle.direction) * obstacle.speed;
+                obstacle.y += Math.sin(obstacle.direction) * obstacle.speed;
+                
+                // Bounce off walls
+                if (obstacle.x <= 0 || obstacle.x >= canvas.width - obstacle.width) {
+                    obstacle.direction = Math.PI - obstacle.direction;
+                }
+                
+                if (obstacle.y <= 0 || obstacle.y >= canvas.height - obstacle.height) {
+                    obstacle.direction = -obstacle.direction;
+                }
+                
+                // Keep within bounds (in case of any calculation errors)
+                if (obstacle.x < 0) obstacle.x = 0;
+                if (obstacle.x > canvas.width - obstacle.width) obstacle.x = canvas.width - obstacle.width;
+                if (obstacle.y < 0) obstacle.y = 0;
+                if (obstacle.y > canvas.height - obstacle.height) obstacle.y = canvas.height - obstacle.height;
+            }
+        }
+        
+        function checkCollisions() {
+            // Check mosquito collision with blood drops
+            for (let i = bloodDrops.length - 1; i >= 0; i--) {
+                if (isColliding(mosquito, bloodDrops[i])) {
+                    bloodCount += bloodDrops[i].value;
+                    bloodDrops.splice(i, 1);
+                    
+                    // Check for level up
+                    if (bloodCount >= level * 10) {
+                        levelUp();
+                    }
+                    
+                    updateUI();
+                    spawnBloodDrops();
+                }
+            }
+            
+            // Check mosquito collision with obstacles
+            for (let i = 0; i < obstacles.length; i++) {
+                if (isColliding(mosquito, obstacles[i])) {
+                    gameOver();
+                    return;
+                }
+            }
+        }
+        
+        function isColliding(obj1, obj2) {
+            return (
+                obj1.x < obj2.x + obj2.width &&
+                obj1.x + obj1.width > obj2.x &&
+                obj1.y < obj2.y + obj2.height &&
+                obj1.y + obj1.height > obj2.y
+            );
+        }
+        
+        function levelUp() {
+            level++;
+            mosquito.speed += 0.5;
+            gameSpeed *= 1.2;
+            updateUI();
+        }
+        
+        function updateUI() {
+            gameUI.textContent = `BLOOD: ${bloodCount} | LEVEL: ${level}`;
+        }
+        
+        function gameOver() {
+            gameActive = false;
+            finalScoreEl.textContent = `BLOOD COLLECTED: ${bloodCount}`;
+            gameOverScreen.style.display = 'flex';
+        }
+        
+        function drawMosquito() {
+            ctx.fillStyle = mosquito.color;
+            
+            // Main mosquito body (oval)
+            ctx.beginPath();
+            ctx.ellipse(
+                mosquito.x + mosquito.width/2, 
+                mosquito.y + mosquito.height/2, 
+                mosquito.width/2, 
+                mosquito.height/3, 
+                0, 0, Math.PI * 2
+            );
+            ctx.fill();
+            
+            // Wings (simple lines for 8-bit style)
+            ctx.strokeStyle = '#aaaaff';
+            ctx.lineWidth = 2;
+            
+            // Left wing
+            ctx.beginPath();
+            ctx.moveTo(mosquito.x + mosquito.width/2, mosquito.y + mosquito.height/3);
+            ctx.lineTo(mosquito.x, mosquito.y);
+            ctx.stroke();
+            
+            // Right wing
+            ctx.beginPath();
+            ctx.moveTo(mosquito.x + mosquito.width/2, mosquito.y + mosquito.height/3);
+            ctx.lineTo(mosquito.x + mosquito.width, mosquito.y);
+            ctx.stroke();
+            
+            // Proboscis (the needle-like mouth part)
+            ctx.strokeStyle = '#ff0000';
+            ctx.beginPath();
+            ctx.moveTo(mosquito.x + mosquito.width/2, mosquito.y + mosquito.height/2);
+            ctx.lineTo(mosquito.x + mosquito.width/2, mosquito.y + mosquito.height + 5);
+            ctx.stroke();
+        }
+        
+        function drawBloodDrops() {
+            bloodDrops.forEach(drop => {
+                // Draw a simple blood drop shape
+                ctx.fillStyle = drop.color;
+                
+                // Main drop body
+                ctx.beginPath();
+                ctx.arc(
+                    drop.x + drop.width/2,
+                    drop.y + drop.height/2,
+                    drop.width/2,
+                    0, Math.PI * 2
+                );
+                ctx.fill();
+            });
+        }
+        
+        function drawObstacles() {
+            obstacles.forEach(obstacle => {
+                if (obstacle.type === 'swatter') {
+                    // Draw a simple fly swatter
+                    ctx.fillStyle = obstacle.color;
+                    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+                    
+                    // Draw grid pattern
+                    ctx.strokeStyle = '#666666';
+                    ctx.lineWidth = 1;
+                    
+                    // Vertical lines
+                    for (let i = 1; i < 3; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(obstacle.x + (obstacle.width / 3) * i, obstacle.y);
+                        ctx.lineTo(obstacle.x + (obstacle.width / 3) * i, obstacle.y + obstacle.height);
+                        ctx.stroke();
+                    }
+                    
+                    // Horizontal lines
+                    for (let i = 1; i < 3; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(obstacle.x, obstacle.y + (obstacle.height / 3) * i);
+                        ctx.lineTo(obstacle.x + obstacle.width, obstacle.y + (obstacle.height / 3) * i);
+                        ctx.stroke();
+                    }
+                } else {
+                    // Draw a bug spray cloud
+                    ctx.fillStyle = obstacle.color;
+                    
+                    // Draw multiple overlapping circles for cloud effect
+                    const centerX = obstacle.x + obstacle.width/2;
+                    const centerY = obstacle.y + obstacle.height/2;
+                    const radius = obstacle.width/3;
+                    
+                    // Main cloud body
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Additional cloud puffs
+                    ctx.beginPath();
+                    ctx.arc(centerX - radius/2, centerY, radius/1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.beginPath();
+                    ctx.arc(centerX + radius/2, centerY, radius/1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY - radius/2, radius/1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY + radius/2, radius/1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+        }
+        
+        function drawGame() {
+            // Draw background
+            ctx.fillStyle = '#000022';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw game elements
+            drawBloodDrops();
+            drawObstacles();
+            drawMosquito();
+        }
+    </script>
+</body>
+</html>
