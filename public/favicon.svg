@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#000022" rx="2" ry="2"/>
+  
+  <!-- Mosquito body - oval shape -->
+  <ellipse cx="32" cy="32" rx="16" ry="10" fill="#ff6666"/>
+  
+  <!-- Wings -->
+  <path d="M32 25 L16 12 L32 28 Z" fill="#aaaaff" stroke="#aaaaff" stroke-width="2"/>
+  <path d="M32 25 L48 12 L32 28 Z" fill="#aaaaff" stroke="#aaaaff" stroke-width="2"/>
+  
+  <!-- Eyes -->
+  <circle cx="26" cy="28" r="3" fill="#000022"/>
+  <circle cx="38" cy="28" r="3" fill="#000022"/>
+  
+  <!-- Proboscis (needle) -->
+  <line x1="32" y1="34" x2="32" y2="52" stroke="#ff0000" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Legs (simple lines) -->
+  <line x1="24" y1="32" x2="14" y2="42" stroke="#ff6666" stroke-width="2"/>
+  <line x1="28" y1="34" x2="20" y2="48" stroke="#ff6666" stroke-width="2"/>
+  <line x1="36" y1="34" x2="44" y2="48" stroke="#ff6666" stroke-width="2"/>
+  <line x1="40" y1="32" x2="50" y2="42" stroke="#ff6666" stroke-width="2"/>
+</svg>
