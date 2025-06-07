@@ -1,553 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IH OS 95 - Build Digital Products!</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <title>Richard Angapin</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            image-rendering: pixelated;
-            image-rendering: -moz-crisp-edges;
-            image-rendering: crisp-edges;
         }
-        
+
+        :root {
+            --bg-color: #28282B;
+            --text-color: #FAF9F6;
+            --hover-color: #ffffff;
+            --border-color: rgba(245, 245, 220, 0.15);
+        }
+
         body {
-            font-family: 'VT323', monospace;
-            background: #c0c0c0;
-            color: #000;
-            overflow: hidden;
-            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC7SURBVCiRndKxSgNBFIXhb3KzuwlYCFoIip2VhY+QJ/ANfAIfwCcQC60srARBsBGxsLCwEQsbQbC4zO7cztzZGQMLZ5jhx4E7/3DOvVeqVKrJdI5Gvlc+OGECP+mMOzTxjCNM4xt9HOMLU8R4QA9XmEeEa+zgCQtoYxUPGGIN+7jFMnawgQ4WsYVz3KOFBvKZLhRaw4pyBQ6wmckMUcMHqvjEFnKDO3lPdY4hPpBg1C2/2/KP1H/8A/8V5ZjP/8ixAAAAAElFTkSuQmCC'), auto;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .desktop {
-            width: 100vw;
-            height: 100vh;
-            background: #c0c0c0;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .window {
-            width: 100vw;
-            height: 100vh;
-            background: #c0c0c0;
-            border: 2px solid #000;
-            box-shadow: 
-                inset -1px -1px 0 #000,
-                inset 1px 1px 0 #fff,
-                inset -2px -2px 0 #808080,
-                inset 2px 2px 0 #dfdfdf;
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-        }
-        
-        .title-bar {
-            background: linear-gradient(to right, #000080, #1084d0);
-            color: #fff;
-            padding: 2px 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 16px;
-            height: 22px;
-        }
-        
-        .title-bar-buttons {
-            display: flex;
-            gap: 2px;
-        }
-        
-        .title-bar-button {
-            width: 16px;
-            height: 16px;
-            background: #c0c0c0;
-            border: 1px solid #000;
-            box-shadow: 
-                inset -1px -1px 0 #000,
-                inset 1px 1px 0 #fff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
-        
-        .title-bar-button:active {
-            box-shadow: 
-                inset 1px 1px 0 #000,
-                inset -1px -1px 0 #fff;
-        }
-        
-        .game-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 8px;
-            gap: 8px;
-        }
-        
-        .stats-bar {
-            background: #808080;
-            border: 2px solid;
-            border-color: #000 #fff #fff #000;
-            padding: 12px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 24px;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        
-        .stat {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .main-area {
-            flex: 1;
-            display: flex;
-            gap: 8px;
-        }
-        
-        .computer-screen {
-            flex: 1;
-            background: #000;
-            border: 2px solid;
-            border-color: #000 #fff #fff #000;
-            padding: 20px;
-            color: #0f0;
-            font-size: 20px;
-            overflow-y: auto;
-            position: relative;
-        }
-        
-        .actions-panel {
-            width: 250px;
-            background: #c0c0c0;
-            border: 2px solid;
-            border-color: #fff #000 #000 #fff;
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .button-95 {
-            background: #c0c0c0;
-            border: 2px solid;
-            border-color: #fff #000 #000 #fff;
-            padding: 8px 16px;
-            font-family: 'VT323', monospace;
+            font-family: Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
             font-size: 18px;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.1s;
         }
-        
-        .button-95:hover {
-            background: #d0d0d0;
-        }
-        
-        .button-95:active {
-            border-color: #000 #fff #fff #000;
-            padding: 9px 15px 7px 17px;
-        }
-        
-        .button-95:disabled {
-            color: #808080;
-            cursor: not-allowed;
-        }
-        
-        .popup {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #c0c0c0;
-            border: 2px solid #000;
-            box-shadow: 
-                inset -1px -1px 0 #000,
-                inset 1px 1px 0 #fff,
-                inset -2px -2px 0 #808080,
-                inset 2px 2px 0 #dfdfdf;
-            padding: 16px;
-            z-index: 100;
-            min-width: 300px;
-        }
-        
-        .popup-title {
-            background: linear-gradient(to right, #000080, #1084d0);
-            color: #fff;
-            margin: -16px -16px 16px -16px;
-            padding: 4px 8px;
-            font-size: 16px;
-        }
-        
-        .popup-content {
-            font-size: 18px;
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-        
-        .popup-buttons {
+
+        /* Header */
+        header {
             display: flex;
-            gap: 8px;
+            align-items: center;
             justify-content: center;
-        }
-        
-        .progress-bar {
-            background: #000;
-            border: 2px solid;
-            border-color: #000 #fff #fff #000;
-            height: 24px;
-            position: relative;
-            margin-top: 8px;
-        }
-        
-        .progress-fill {
-            background: #0f0;
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s;
-        }
-        
-        .code-line {
-            margin: 4px 0;
-            opacity: 0;
-            animation: fadeIn 0.5s forwards;
-        }
-        
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-        
-        .blink {
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
-        
-        .pixel-icon {
-            width: 32px;
-            height: 32px;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        
-        .linkedin-input {
+            padding: 2rem;
+            position: fixed;
+            top: 0;
             width: 100%;
-            padding: 4px;
-            margin-top: 8px;
-            font-family: 'VT323', monospace;
-            font-size: 16px;
-            border: 2px solid;
-            border-color: #000 #fff #fff #000;
-            background: #fff;
+            background-color: var(--bg-color);
+            z-index: 100;
+            gap: 2rem;
         }
-        
-        .product-list {
-            margin-top: 16px;
-            padding: 8px;
-            background: #000;
-            border: 2px solid;
-            border-color: #000 #fff #fff #000;
-            color: #0f0;
-            max-height: 150px;
+
+        .site-title {
+            font-size: 1.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Dark Mode Toggle */
+        .toggle-switch {
+            position: absolute;
+            right: 2rem;
+            width: 50px;
+            height: 26px;
+            background-color: #333;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background-color: var(--text-color);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Light mode styles */
+        body.light-mode {
+            --bg-color: #FAF9F6;
+            --text-color: #28282B;
+            --border-color: rgba(10, 10, 10, 0.15);
+        }
+
+        body.light-mode .toggle-switch {
+            background-color: #666;
+        }
+
+        body.light-mode .toggle-switch::after {
+            transform: translateX(24px);
+            background-color: #0a0a0a;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            margin-top: 5rem;
+            min-height: calc(100vh - 5rem);
+            width: 100%;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            padding: 2rem;
+            position: fixed;
+            height: calc(100vh - 5rem);
+            width: 250px;
             overflow-y: auto;
         }
-        
-        .product-item {
-            padding: 4px;
-            margin: 2px 0;
-            cursor: pointer;
+
+        .sidebar h3 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: normal;
+            letter-spacing: 0.05em;
+            opacity: 0.7;
         }
-        
-        .product-item:hover {
-            background: #0f0;
-            color: #000;
+
+        .article-list {
+            list-style: none;
         }
-        
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: #0f0;
-            margin-left: 2px;
+
+        .article-list li {
+            margin-bottom: 1rem;
+        }
+
+        .article-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0;
+            opacity: 0.8;
+        }
+
+        .article-list a:hover,
+        .article-list a.active {
+            opacity: 1;
+            padding-left: 0.5rem;
+        }
+
+        .article-list a.active {
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 3rem 2rem 4rem 2rem;
+        }
+
+        .article-wrapper {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        /* Article Styles */
+        .article {
+            display: none;
+        }
+
+        .article.active {
+            display: block;
+        }
+
+        .article h1 {
+            font-size: 2.5rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .article .meta {
+            font-size: 1rem;
+            opacity: 0.6;
+            margin-bottom: 3rem;
+        }
+
+        .article h2 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            margin: 3rem 0 1.5rem 0;
+        }
+
+        .article p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .article em {
+            font-style: italic;
+        }
+
+        .article strong {
+            font-weight: bold;
+        }
+
+        .article a {
+            color: var(--text-color);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity 0.3s ease;
+        }
+
+        .article a:hover {
+            opacity: 0.7;
+        }
+
+        .article blockquote {
+            margin: 2rem 0;
+            padding-left: 2rem;
+            border-left: 3px solid var(--border-color);
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 1.5rem;
+            }
+
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .article h1 {
+                font-size: 2rem;
+            }
+
+            body {
+                font-size: 16px;
+            }
+
+            .toggle-switch {
+                right: 1.5rem;
+            }
+        }
+
+        /* Scrollbar styling */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: var(--text-color);
+            opacity: 0.5;
         }
     </style>
 </head>
+
 <body>
-    <div class="desktop">
-        <div class="window">
-            <div class="title-bar">
-                <span>💾 IH OS 95 - Build Digital Products!</span>
-                <div class="title-bar-buttons">
-                    <div class="title-bar-button">_</div>
-                    <div class="title-bar-button">□</div>
-                    <div class="title-bar-button">✕</div>
-                </div>
-            </div>
-            
-            <div class="game-container">
-                <div class="stats-bar">
-                    <div class="stat">💰 $<span id="money">100</span></div>
-                    <div class="stat">⚡ Energy: <span id="energy">100</span></div>
-                    <div class="stat">🎯 Products: <span id="products">0</span></div>
-                    <div class="stat">📊 MRR: $<span id="mrr">0</span></div>
-                </div>
-                
-                <div class="main-area">
-                    <div class="computer-screen" id="screen">
-                        <div id="screen-content">
-                            <div class="code-line">C:\IH OS> Welcome to IH OS 95!</div>
-                            <div class="code-line" style="animation-delay: 0.5s">C:\IH OS> Build digital products and grow your MRR!</div>
-                            <div class="code-line" style="animation-delay: 1s">C:\IH OS> Click actions to start building...<span class="cursor blink"></span></div>
-                        </div>
-                    </div>
+    <header>
+        <div class="site-title">Notes</div>
+        <div class="toggle-switch" onclick="toggleDarkMode()"></div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <h3>Articles</h3>
+            <ul class="article-list">
+                <li><a href="#" class="active" onclick="showArticle('article1', this)">Building HackerScope</a></li>
+                <!--                 <li><a href="#" onclick="showArticle('article2', this)">The Art of Slow Living</a></li>
+                <li><a href="#" onclick="showArticle('article3', this)">Building with Constraints</a></li>
+                <li><a href="#" onclick="showArticle('article4', this)">Notes on Creativity</a></li>
+                <li><a href="#" onclick="showArticle('article5', this)">Systems Thinking</a></li> -->
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <div class="article-wrapper">
+                <article id="article1" class="article active">
+                    <p>After resigning from my job and failing a crucial interview, I discovered the transformative
+                        power of AI during my post-interview research. This led me to build HackerScope AI—solving my
+                        own problem while creating value for others who might face similar challenges.</p>
+
+                    <h3>The Genesis</h3>
+
+                    <p>The choice of Tempo AI felt natural for its integration capabilities. There's a certain poetry in
+                        how the idea for HackerScope emerged from a Tempo Labs video showcasing the EXA API—inspiration
+                        arriving through the very tools that would build it. Sometimes the universe aligns in unexpected
+                        ways.</p>
+
+                    <h3>The Four-Day Journey</h3>
+
+                    <p>Four days. That's all it took, though time moved differently throughout. The first three days
+                        felt like weeks—endless loops of errors, particularly the "use client" complications and
+                        subscription tier logic that refused to cooperate. Each error message became a lesson in
+                        patience, each failed attempt a step toward understanding.</p>
+
+                    <p>As someone who finds comfort in aesthetic perfection, the design process became its own form of
+                        torture. I cycled through countless iterations, each falling short of the vision in my mind. The
+                        minimalist approach felt too stark. The playful design seemed unprofessional. Nothing felt quite
+                        right, and this paralysis threatened to consume the entire project.</p>
+
+                    <h3>The Breakthrough</h3>
+
+                    <p>Day four arrived with a different energy. Perhaps it was exhaustion, or perhaps clarity, but I
+                        approached the work differently. Instead of comprehensive requests, I broke everything into
+                        small, precise prompts. Twelve of them, each focused on a single aspect. The code that emerged
+                        was clean, purposeful—it had found its voice.</p>
+
+                    <p>There's something profound about that moment when a project clicks into place. After days of
+                        struggle, suddenly the pieces align. The interface felt right. The functionality worked. The
+                        vision had materialized, not exactly as imagined, but perhaps better for having survived the
+                        journey.</p>
+
+                    <h3>Reflections</h3>
+
+                    <p>Starting over taught me that destruction can be creative. Each restart wasn't a failure but a
+                        distillation of learning. The accumulated technical debt of previous attempts fell away, leaving
+                        only the essential understanding.</p>
+
+                    <p>Working with AI requires a different rhythm than traditional development. It demands patience
+                        with the process, precision in communication, and acceptance that the path isn't always linear.
+                        The tools we use shape not just what we build, but how we think about building.</p>
+
+                    <p>Perhaps most importantly, I learned that perfection is the enemy of existence. The polished
+                        interface I obsessed over mattered less than the functional product that could help someone
+                        else. An imperfect solution that exists serves more purpose than a perfect one that remains
+                        trapped in endless iteration.</p>
+
+                    <h3>Looking Forward</h3>
+
+                    <p>HackerScope AI now exists in the world—my first real product, born from failure and shaped by
+                        persistence. There's a peculiar satisfaction in building a tool I genuinely want to use myself.
+                        The AI that helps generate business ideas was itself generated through AI assistance, a
+                        recursive loop that feels fitting for our current technological moment.</p>
+
+                    <p>I find myself eager to see where this leads, both for HackerScope and for whatever ideas it might
+                        help uncover. The failure that started this journey has transformed into something beautiful and 
+                        unexpected—not just a product, but a new way of thinking about creation.</p>
+
+                    <p>The learning never stops; the building continues.</p>
+                </article>
+                <!-- 
+                <article id="article2" class="article">
+                    <h1>The Art of Slow Living</h1>
+                    <div class="meta">January 10, 2025</div>
                     
-                    <div class="actions-panel">
-                        <h3 style="text-align: center; margin-bottom: 8px;">ACTIONS</h3>
-                        <button class="button-95" onclick="code()">💻 Code Product</button>
-                        <button class="button-95" onclick="market()">📢 Market Product</button>
-                        <button class="button-95" onclick="coffee()">☕ Drink Coffee</button>
-                        <button class="button-95" onclick="sleep()">😴 Sleep</button>
-                        <button class="button-95" onclick="showProducts()">📦 My Products</button>
-                        <button class="button-95" onclick="hackerNews()">📰 Hacker News</button>
-                        <div style="margin-top: auto; padding-top: 16px;">
-                            <button class="button-95" onclick="openMyLinkedIn()" style="width: 100%; background: #0077b5; color: white; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                    <p>Slow living is a deliberate choice to step back from the frenetic pace of modern life. It's about quality over quantity, presence over productivity, and <em>being</em> over doing.</p>
+                    
+                    <p>In a culture that glorifies busyness and treats exhaustion as a status symbol, choosing slowness is almost a radical act. Yet this choice offers profound rewards: deeper relationships, enhanced creativity, and a more meaningful existence.</p>
+                    
+                    <h2>Time as a Canvas</h2>
+                    
+                    <p>When we slow down, time transforms from an enemy to be conquered into a canvas for living. Moments expand. Details emerge. The ordinary reveals its extraordinary nature.</p>
+                    
+                    <p>Consider the simple act of making tea. Rushed, it's merely caffeine delivery. Slowed, it becomes ritual: the weight of water, the unfurling leaves, the rising steam, the warmth between palms. Same act, transformed by pace.</p>
+                    
+                    <blockquote>
+                        "Nature does not hurry, yet everything is accomplished."
+                    </blockquote>
+                    
+                    <h2>The Practice of Presence</h2>
+                    
+                    <p>Slow living isn't about doing everything at a snail's pace. It's about being fully present in whatever pace life requires. Sometimes life demands speed—and we can meet that demand while maintaining our center.</p>
+                    
+                    <p>The key is <strong>intentionality</strong>. When we must move quickly, we do so with purpose. When we can move slowly, we savor the opportunity. In both cases, we remain connected to our choices rather than being swept along by external pressures.</p>
+                </article>
+
+                <article id="article3" class="article">
+                    <h1>Building with Constraints</h1>
+                    <div class="meta">January 5, 2025</div>
+                    
+                    <p>Creativity flourishes not in spite of constraints, but because of them. When faced with limitations, we're forced to find novel solutions, to think differently, to <em>innovate</em> rather than merely iterate.</p>
+                    
+                    <p>This principle applies across disciplines. The haiku's seventeen syllables. The painter's palette. The programmer's system resources. In each case, constraint becomes catalyst.</p>
+                    
+                    <h2>The Paradox of Choice</h2>
+                    
+                    <p>Unlimited options often lead to paralysis. When everything is possible, nothing feels necessary. Constraints provide the structure within which creativity can flow.</p>
+                    
+                    <p>Consider Twitter's original 140-character limit. What seemed like a limitation sparked an entire new form of communication—concise, immediate, poetic. The constraint didn't limit expression; it transformed it.</p>
+                    
+                    <h2>Embracing Limitations</h2>
+                    
+                    <p>Rather than fighting constraints, we can learn to dance with them. Each limitation is an invitation to explore new territory, to find unexpected solutions, to discover capabilities we didn't know we had.</p>
+                    
+                    <blockquote>
+                        "In the beginner's mind there are many possibilities, but in the expert's mind there are few."
+                    </blockquote>
+                    
+                    <p>The next time you face a constraint—whether in time, resources, or capabilities—try viewing it not as an obstacle but as a creative partner. You might be surprised by what emerges from the collaboration.</p>
+                </article>
+
+                <article id="article4" class="article">
+                    <h1>Notes on Creativity</h1>
+                    <div class="meta">December 28, 2024</div>
+                    
+                    <p>Creativity is not a mystical force that strikes at random. It's a practice, a discipline, a way of moving through the world with <em>openness</em> and curiosity.</p>
+                    
+                    <p>The myth of the tortured artist waiting for inspiration has done immense damage. Real creativity is quieter, steadier, more workmanlike. It shows up every day, whether the muse does or not.</p>
+                    
+                    <h2>The Daily Practice</h2>
+                    
+                    <p>Establishing a creative practice means showing up consistently, regardless of mood or inspiration. It means treating creativity as a job—because it is one, whether it pays or not.</p>
+                    
+                    <p>This doesn't mean forcing output. Some days, the practice might be simply sitting with a blank page. Other days, it might be taking a walk, reading, or having a conversation. The key is <strong>intentional engagement</strong> with the creative process.</p>
+                    
+                    <h2>Cultivating Wonder</h2>
+                    
+                    <p>Children are naturally creative because they haven't yet learned what's impossible. They approach the world with wonder, seeing potential where adults see limitation.</p>
+                    
+                    <p>We can cultivate this same wonder by practicing beginner's mind. By asking "what if?" instead of "why not?" By playing with ideas without immediately judging their value.</p>
+                    
+                    <blockquote>
+                        "Every child is an artist. The problem is how to remain an artist once we grow up."
+                    </blockquote>
+                    
+                    <p>Creativity thrives in an atmosphere of play, experimentation, and gentle curiosity. Create that atmosphere, and creativity will follow.</p>
+                </article>
+
+                <article id="article5" class="article">
+                    <h1>Systems Thinking</h1>
+                    <div class="meta">December 20, 2024</div>
+                    
+                    <p>In a world of increasing complexity, the ability to think in systems—to see connections, patterns, and relationships—becomes ever more crucial. Systems thinking is about understanding the <em>whole</em> rather than just the parts.</p>
+                    
+                    <p>Traditional thinking often focuses on linear cause and effect. Systems thinking recognizes that effects can become causes, creating feedback loops that can either stabilize or destabilize the entire system.</p>
+                    
+                    <h2>Everything is Connected</h2>
+                    
+                    <p>No element exists in isolation. Change one part of a system, and ripple effects spread throughout. This interconnectedness means that small changes can have large impacts—and large changes can sometimes have surprisingly small effects.</p>
+                    
+                    <p>Consider a simple example: traffic. Adding more lanes to reduce congestion often increases it, as more people choose to drive. The solution that seems obvious in isolation fails when we consider the system as a whole.</p>
+                    
+                    <h2>Leverage Points</h2>
+                    
+                    <p>Understanding systems means identifying leverage points—places where small shifts can create significant change. These aren't always where we expect them to be.</p>
+                    
+                    <blockquote>
+                        "The purpose of a system is what it does, not what it says it does."
+                    </blockquote>
+                    
+                    <p>Often, the most powerful leverage points are in the <strong>mental models</strong> that shape the system. Change how people think, and you change how the system behaves.</p>
+                    
+                    <p>Systems thinking isn't just an analytical tool—it's a more holistic way of engaging with the world. It reminds us that we're part of larger wholes, that our actions have consequences beyond what we can see, and that wisdom often lies in understanding relationships rather than isolated facts.</p>
+                </article> -->
             </div>
-        </div>
+        </main>
     </div>
 
     <script>
-        let stats = {
-            money: 100,
-            energy: 100,
-            products: 0,
-            mrr: 0,
-            productList: []
-        };
+        // Article navigation
+        function showArticle(articleId, linkElement) {
+            // Hide all articles
+            const articles = document.querySelectorAll('.article');
+            articles.forEach(article => article.classList.remove('active'));
 
-        const MY_LINKEDIN_URL = 'https://www.linkedin.com/in/rangapin'; // Replace with your LinkedIn URL
+            // Show selected article
+            document.getElementById(articleId).classList.add('active');
 
-        const productNames = [
-            'SaaS Dashboard', 'API Monitor', 'Code Editor', 'Task Manager',
-            'Email Client', 'Chat App', 'Analytics Tool', 'CRM System',
-            'Payment Gateway', 'File Uploader', 'Password Manager', 'RSS Reader'
-        ];
+            // Update active link
+            const links = document.querySelectorAll('.article-list a');
+            links.forEach(link => link.classList.remove('active'));
+            linkElement.classList.add('active');
 
-        function updateStats() {
-            document.getElementById('money').textContent = stats.money;
-            document.getElementById('energy').textContent = stats.energy;
-            document.getElementById('products').textContent = stats.products;
-            document.getElementById('mrr').textContent = stats.mrr;
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
 
-        function addScreenLine(text, isCode = true) {
-            const screen = document.getElementById('screen-content');
-            const line = document.createElement('div');
-            line.className = 'code-line';
-            line.style.animationDelay = '0s';
-            line.innerHTML = isCode ? `C:\\IH OS> ${text}` : text;
-            screen.appendChild(line);
-            screen.parentElement.scrollTop = screen.parentElement.scrollHeight;
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         }
 
-        function code() {
-            if (stats.energy < 20) {
-                showPopup('Too Tired!', 'You need at least 20 energy to code. Drink coffee or sleep!');
-                return;
+        // Load saved theme
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
             }
+        });
 
-            stats.energy -= 20;
-            updateStats();
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const activeLink = document.querySelector('.article-list a.active');
+            const allLinks = Array.from(document.querySelectorAll('.article-list a'));
+            const currentIndex = allLinks.indexOf(activeLink);
 
-            addScreenLine('Starting new product development...');
-            
-            setTimeout(() => {
-                addScreenLine('npm install everything...');
-            }, 500);
-            
-            setTimeout(() => {
-                addScreenLine('Writing code... function buildAwesomeProduct() {');
-            }, 1000);
-            
-            setTimeout(() => {
-                addScreenLine('  // TODO: Make it work');
-                addScreenLine('  return "It works on my machine!";');
-                addScreenLine('}');
-            }, 1500);
-
-            setTimeout(() => {
-                const productName = productNames[Math.floor(Math.random() * productNames.length)];
-                const revenue = Math.floor(Math.random() * 50) + 10;
-                stats.products++;
-                stats.mrr += revenue;
-                stats.productList.push({ name: productName, revenue: revenue });
-                updateStats();
-                addScreenLine(`✅ Successfully built: ${productName}!`);
-                addScreenLine(`📈 Added $${revenue} to your MRR!`);
-            }, 2500);
-        }
-
-        function market() {
-            if (stats.products === 0) {
-                showPopup('No Products!', 'You need to build a product first before marketing it!');
-                return;
+            if (e.key === 'ArrowDown' && currentIndex < allLinks.length - 1) {
+                allLinks[currentIndex + 1].click();
+            } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+                allLinks[currentIndex - 1].click();
             }
-
-            if (stats.money < 50) {
-                showPopup('Not Enough Money!', 'You need at least $50 to run marketing campaigns!');
-                return;
-            }
-
-            stats.money -= 50;
-            const boost = Math.floor(Math.random() * 30) + 10;
-            stats.mrr += boost;
-            updateStats();
-
-            addScreenLine('📢 Running marketing campaign...');
-            setTimeout(() => {
-                addScreenLine('Posting on ProductHunt...');
-            }, 500);
-            setTimeout(() => {
-                addScreenLine('Tweeting about your product...');
-            }, 1000);
-            setTimeout(() => {
-                addScreenLine(`✅ Marketing successful! MRR increased by $${boost}!`);
-            }, 1500);
-        }
-
-        function coffee() {
-            if (stats.money < 5) {
-                showPopup('No Money!', 'You need $5 for coffee. Keep building!');
-                return;
-            }
-
-            stats.money -= 5;
-            stats.energy = Math.min(100, stats.energy + 30);
-            updateStats();
-
-            addScreenLine('☕ Drinking coffee...');
-            setTimeout(() => {
-                addScreenLine('Energy restored! Ready to code! ⚡');
-            }, 1000);
-        }
-
-        function sleep() {
-            stats.energy = 100;
-            updateStats();
-
-            addScreenLine('😴 Going to sleep...');
-            setTimeout(() => {
-                addScreenLine('ZZZ... ZZZ... ZZZ...');
-            }, 500);
-            setTimeout(() => {
-                addScreenLine('☀️ Good morning! Energy fully restored!');
-                const dailyIncome = stats.mrr;
-                stats.money += dailyIncome;
-                updateStats();
-                addScreenLine(`💰 Daily MRR income: $${dailyIncome} received!`);
-            }, 1500);
-        }
-
-        function showProducts() {
-            let content = '<div class="popup-title">📦 My Products</div><div class="popup-content">';
-            
-            if (stats.productList.length === 0) {
-                content += 'No products yet! Start building!';
-            } else {
-                content += '<div class="product-list">';
-                stats.productList.forEach(product => {
-                    content += `<div class="product-item">🚀 ${product.name} - $${product.revenue}/month</div>`;
-                });
-                content += '</div>';
-            }
-            
-            content += '</div><div class="popup-buttons"><button class="button-95" onclick="closePopup()">OK</button></div>';
-            
-            showPopupContent(content);
-        }
-
-        function openMyLinkedIn() {
-            window.open(MY_LINKEDIN_URL, '_blank');
-        }
-
-        function hackerNews() {
-            addScreenLine('📰 Checking Hacker News...');
-            setTimeout(() => {
-                const headlines = [
-                    'Show HN: I built a SaaS in 24 hours',
-                    'My side project hit $10k MRR',
-                    'Why I quit my job to become an indie hacker',
-                    'The best tech stack for 2024',
-                    'How to validate your startup idea'
-                ];
-                const headline = headlines[Math.floor(Math.random() * headlines.length)];
-                addScreenLine(`Top story: "${headline}"`);
-                addScreenLine('You feel inspired! 🚀');
-            }, 1000);
-        }
-
-        function showPopup(title, message) {
-            const popup = document.createElement('div');
-            popup.className = 'popup';
-            popup.innerHTML = `
-                <div class="popup-title">${title}</div>
-                <div class="popup-content">${message}</div>
-                <div class="popup-buttons">
-                    <button class="button-95" onclick="closePopup()">OK</button>
-                </div>
-            `;
-            document.body.appendChild(popup);
-        }
-
-        function showPopupContent(content) {
-            const popup = document.createElement('div');
-            popup.className = 'popup';
-            popup.innerHTML = content;
-            document.body.appendChild(popup);
-        }
-
-        function closePopup() {
-            const popup = document.querySelector('.popup');
-            if (popup) {
-                popup.remove();
-            }
-        }
-
-        // Initialize
-        updateStats();
+        });
     </script>
 </body>
+
 </html>
