@@ -70,12 +70,14 @@
         
         .player {
             position: absolute;
-            bottom: 50px;
+            bottom: 150px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 24px;
             transition: left 0.1s ease;
             z-index: 50;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
         }
         
         .enemy {
@@ -153,10 +155,24 @@
             background: rgba(0, 20, 0, 0.9);
             border: 1px solid #00ff00;
             padding: 15px;
-            max-height: 200px;
+            max-height: 120px;
             overflow-y: auto;
             font-size: 12px;
             z-index: 100;
+        }
+        
+        .controls-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 40, 0, 0.9);
+            border: 1px solid #00ff00;
+            padding: 20px;
+            text-align: center;
+            z-index: 150;
+            font-size: 14px;
+            animation: fadeIn 1s ease-out;
         }
         
         .menu {
@@ -277,8 +293,20 @@
                 <div>> Initializing indie hacker journey...</div>
                 <div>> Loading customer support experience...</div>
                 <div>> HackerScope.exe starting...</div>
-                <div>> Use ARROW KEYS to navigate, SPACE to fire solutions!</div>
-                <div class="blink">> Press ESC to return to main terminal</div>
+                <div style="color: #ffff00;">> CONTROLS: ← → ARROW KEYS to move | SPACEBAR to fire | ESC to quit</div>
+            </div>
+            
+            <div id="controlsHint" class="controls-hint">
+                <h3 style="color: #00ff00; margin-bottom: 15px;">🚀 INDIE HACKER SHIP READY 🚀</h3>
+                <p style="margin-bottom: 10px;">Navigate through the startup galaxy!</p>
+                <p style="color: #ffff00; margin-bottom: 15px;">
+                    ← → <strong>ARROW KEYS</strong> to move your ship<br>
+                    <strong>SPACEBAR</strong> to fire solutions at problems<br>
+                    <strong>ESC</strong> to return to terminal
+                </p>
+                <button onclick="startGameplay()" style="background: transparent; border: 1px solid #00ff00; color: #00ff00; padding: 10px 20px; font-family: inherit; cursor: pointer;">
+                    LAUNCH MISSION
+                </button>
             </div>
         </div>
     </div>
@@ -317,60 +345,109 @@
         function startGame() {
             document.getElementById('menu').classList.add('hidden');
             document.getElementById('gameArea').classList.remove('hidden');
+            // Show controls hint first, don't start game loop yet
+        }
+        
+        function startGameplay() {
+            document.getElementById('controlsHint').classList.add('hidden');
             gameState.isPlaying = true;
             gameLoop();
             createStars();
+            
+            // Add initial game message
+            addGameMessage('> Mission started! Eliminate bugs and deploy features!');
         }
 
         function showMission() {
-            updateOutput([
-                "> MISSION BRIEFING:",
-                "> Navigate through the challenges of indie hacking",
-                "> Fix bugs, deploy features, maintain motivation",
-                "> Collect coffee and inspiration powerups", 
-                "> Survive the journey from support engineer to indie hacker",
-                "> Current objective: Make HackerScope profitable",
-                "> Secondary objective: Master customer support engineering"
-            ]);
+            // Create a full screen display for mission
+            const missionDisplay = document.createElement('div');
+            missionDisplay.className = 'menu';
+            missionDisplay.innerHTML = `
+                <h1>MISSION BRIEFING</h1>
+                <div style="text-align: left; margin: 20px 0; font-size: 12px; line-height: 1.6;">
+                    <p>> Navigate through the challenges of indie hacking</p>
+                    <p>> Fix bugs, deploy features, maintain motivation</p>
+                    <p>> Collect coffee and inspiration powerups</p>
+                    <p>> Survive the journey from support engineer to indie hacker</p>
+                    <p>> Current objective: Make HackerScope profitable</p>
+                    <p>> Secondary objective: Master customer support engineering</p>
+                    <br>
+                    <p style="color: #ffff00;">> GAME CONTROLS:</p>
+                    <p>> ARROW KEYS: Navigate your ship</p>
+                    <p>> SPACE: Fire solutions at problems</p>
+                    <p>> ESC: Return to main terminal</p>
+                </div>
+                <button onclick="closeMission()">RETURN TO TERMINAL</button>
+            `;
+            document.body.appendChild(missionDisplay);
         }
 
         function showProjects() {
-            updateOutput([
-                "> SCANNING PROJECT DATABASE...",
-                "> ",
-                "> PROJECT: HackerScope",
-                ">   STATUS: Live (2 weeks old)",
-                ">   TECH: Claude AI + Exa API + Tempo AI",
-                ">   CHALLENGES: Prompt engineering nightmares",
-                ">   DEPLOYMENT: Finally working after much pain",
-                ">   TRACTION: Minimal but learning",
-                "> ",
-                "> PROJECT: This Portfolio",
-                ">   STATUS: Interactive game experience",
-                ">   PURPOSE: Stand out from boring resume sites",
-                ">   INSPIRATION: 80s terminals + space invaders",
-                "> ",
-                "> PROJECT: Next_Project.exe",
-                ">   STATUS: Ideas brewing...",
-                ">   DEPENDS_ON: HackerScope success metrics"
-            ]);
+            const projectDisplay = document.createElement('div');
+            projectDisplay.className = 'menu';
+            projectDisplay.innerHTML = `
+                <h1>PROJECT DATABASE</h1>
+                <div style="text-align: left; margin: 20px 0; font-size: 11px; line-height: 1.5;">
+                    <p style="color: #ffff00;">> SCANNING PROJECT DATABASE...</p>
+                    <br>
+                    <p style="color: #00ffff;">> PROJECT: HackerScope</p>
+                    <p>>   STATUS: Live (2 weeks old)</p>
+                    <p>>   TECH: Claude AI + Exa API + Tempo AI</p>
+                    <p>>   CHALLENGES: Prompt engineering nightmares</p>
+                    <p>>   DEPLOYMENT: Finally working after much pain</p>
+                    <p>>   TRACTION: Minimal but learning</p>
+                    <p>>   URL: <a href="#" style="color: #00ff00;">hackerscope.com</a></p>
+                    <br>
+                    <p style="color: #00ffff;">> PROJECT: This Portfolio</p>
+                    <p>>   STATUS: Interactive game experience</p>
+                    <p>>   PURPOSE: Stand out from boring resume sites</p>
+                    <p>>   INSPIRATION: 80s terminals + space invaders</p>
+                    <br>
+                    <p style="color: #00ffff;">> PROJECT: Next_Project.exe</p>
+                    <p>>   STATUS: Ideas brewing...</p>
+                    <p>>   DEPENDS_ON: HackerScope success metrics</p>
+                </div>
+                <button onclick="closeProjects()">RETURN TO TERMINAL</button>
+            `;
+            document.body.appendChild(projectDisplay);
         }
 
         function showContact() {
-            updateOutput([
-                "> OPENING COMMUNICATION CHANNELS...",
-                "> ",
-                "> EMAIL: your.email@example.com",
-                "> LINKEDIN: /in/yourprofile", 
-                "> TWITTER: @yourhandle",
-                "> GITHUB: /yourusername",
-                "> ",
-                "> AVAILABILITY: Open for support engineer roles",
-                "> INTERESTS: Indie hacking, customer empathy, building tools",
-                "> COFFEE_PREFERENCE: Strong and frequent",
-                "> ",
-                "> TRANSMISSION_END"
-            ]);
+            const contactDisplay = document.createElement('div');
+            contactDisplay.className = 'menu';
+            contactDisplay.innerHTML = `
+                <h1>COMMUNICATION CHANNELS</h1>
+                <div style="text-align: left; margin: 20px 0; font-size: 12px; line-height: 1.6;">
+                    <p style="color: #ffff00;">> OPENING COMMUNICATION CHANNELS...</p>
+                    <br>
+                    <p>> EMAIL: <a href="mailto:your.email@example.com" style="color: #00ff00;">your.email@example.com</a></p>
+                    <p>> LINKEDIN: <a href="https://www.linkedin.com/in/rangapin/" style="color: #00ff00;">/in/yourprofile</a></p>
+                    <p>> TWITTER: <a href="https://x.com/richard_angapin" style="color: #00ff00;">@yourhandle</a></p>
+                    <p>> GITHUB: <a href="https://github.com/rangapin" style="color: #00ff00;">/yourusername</a></p>
+                    <br>
+                    <p style="color: #00ffff;">> CURRENT STATUS:</p>
+                    <p>> AVAILABILITY: Open for support engineer roles</p>
+                    <p>> INTERESTS: Indie hacking, customer empathy, building tools</p>
+                    <p>> COFFEE_PREFERENCE: Strong and frequent</p>
+                    <p>> TIMEZONE: Paris, France</p>
+                    <br>
+                    <p style="color: #ffff00;">> TRANSMISSION_END</p>
+                </div>
+                <button onclick="closeContact()">RETURN TO TERMINAL</button>
+            `;
+            document.body.appendChild(contactDisplay);
+        }
+
+        function closeMission() {
+            document.querySelector('.menu:last-child').remove();
+        }
+
+        function closeProjects() {
+            document.querySelector('.menu:last-child').remove();
+        }
+
+        function closeContact() {
+            document.querySelector('.menu:last-child').remove();
         }
 
         function updateOutput(messages) {
