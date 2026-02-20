@@ -1,0 +1,37 @@
+import { ProjectLayout } from '@/components/ProjectLayout'
+
+export const project = {
+  title: 'Achilleus',
+  description:
+    'SaaS tool for website security monitoring. Helps digital agencies track SSL certificates, security headers, and email authentication across all client domains.',
+  link: 'https://achilleus.so',
+}
+
+export const metadata = {
+  title: project.title,
+  description: project.description,
+}
+
+export default (props) => <ProjectLayout project={project} {...props} />
+
+## The problem
+
+Digital agencies manage dozens of client domains. SSL certificates expire. Security headers go missing after a CMS update. Email authentication breaks when someone changes DNS records without telling anyone. None of these are catastrophic on their own — until a client calls angry, or a browser starts showing security warnings.
+
+The problem isn't that agencies don't care. It's that there's no easy way to monitor all client domains in one place without either paying for an enterprise tool or building something yourself.
+
+## What I built
+
+Achilleus is a SaaS platform that continuously monitors website security posture across all domains an agency manages. It tracks:
+
+- **SSL certificates** — expiry dates, issuer validity, chain issues
+- **Security headers** — HSTS, CSP, X-Frame-Options, Referrer-Policy, and others
+- **Email authentication** — SPF, DKIM, and DMARC configuration
+
+When something breaks or is about to expire, the right person gets notified before the client finds out.
+
+## Why it matters
+
+A missing HSTS header or an expired SSL certificate is the kind of thing that silently erodes client trust. Agencies that catch these issues proactively look sharp. Agencies that don't look careless — even if the underlying work is excellent.
+
+Achilleus turns reactive firefighting into proactive monitoring.

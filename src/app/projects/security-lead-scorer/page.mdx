@@ -1,0 +1,42 @@
+import { ProjectLayout } from '@/components/ProjectLayout'
+
+export const project = {
+  title: 'Security Lead Scorer',
+  description:
+    'Python CLI tool that scans domains for security misconfigurations and scores them 0–100 by security posture. Higher score = worse security = better prospect.',
+  link: 'https://github.com/rangapin/security-leads',
+}
+
+export const metadata = {
+  title: project.title,
+  description: project.description,
+}
+
+export default (props) => <ProjectLayout project={project} {...props} />
+
+## The idea
+
+If you're selling website security services, your best prospects are companies with bad security. The problem is identifying them at scale without manually checking every domain.
+
+Security Lead Scorer flips the script: instead of looking for companies that might need help, it scans a list of domains and scores them by how broken their security actually is. The worse the security, the better the lead.
+
+## What it does
+
+The tool takes a CSV of domains and runs each one through a series of checks:
+
+- SSL certificate validity and expiry
+- Missing or misconfigured security headers (HSTS, CSP, X-Frame-Options, etc.)
+- DNS misconfigurations
+- Email authentication gaps (SPF, DKIM, DMARC)
+
+Each domain gets a score from 0 to 100. Higher score means worse security posture. The output CSV includes the score, a breakdown of what failed, and auto-generated talking points for outreach — specific issues you can reference in a cold email without sounding generic.
+
+## Why it works as an outreach tool
+
+Cold outreach fails when it's vague. "We help companies improve their security" lands in the bin. "Your SSL certificate on careers.yourdomain.com expires in 11 days and your DMARC policy is set to none, which means anyone can spoof your domain in emails" gets a reply.
+
+The talking points the tool generates are specific enough to be credible and urgent enough to prompt action.
+
+## Stack
+
+Python, with standard libraries for DNS lookups, SSL inspection, and HTTP header analysis.

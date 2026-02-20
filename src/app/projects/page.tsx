@@ -12,7 +12,7 @@ const gtmProjects = [
     name: 'E-commerce Lead Generation Pipeline',
     description:
       'Full Clay workflow that takes raw company names through e-commerce qualification (BuiltWith + Claygent), contact discovery, a 5-provider email waterfall, and AI-generated personalized opening lines — 42 verified emails from 64 contacts at ~330 credits total.',
-    link: { href: 'https://clay.com', label: 'clay.com' },
+    link: { href: '/projects/ecommerce-lead-generation-pipeline', label: 'Case study' },
     logo: logoEcommercePipeline,
   },
 ]
@@ -22,14 +22,14 @@ const techProjects = [
     name: 'Achilleus',
     description:
       'SaaS tool for website security monitoring. Helps digital agencies track SSL certificates, security headers, and email authentication across all client domains — before clients find out the hard way.',
-    link: { href: 'https://achilleus.so', label: 'achilleus.so' },
+    link: { href: '/projects/achilleus', label: 'Case study' },
     logo: logoAchilleus,
   },
   {
     name: 'Security Lead Scorer',
     description:
       'Python CLI tool that scans domains for SSL issues, missing security headers, and DNS misconfigurations, then scores them 0–100 by security posture. Higher score = worse security = better prospect. Generates talking points for outreach automatically.',
-    link: { href: 'https://github.com/rangapin/security-leads', label: 'github.com' },
+    link: { href: '/projects/security-lead-scorer', label: 'Case study' },
     logo: logoSecurityLeads,
   },
 ]
