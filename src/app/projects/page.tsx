@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import logoAchilleus from '@/images/logos/achilleus.svg'
+import logoEcommercePipeline from '@/images/logos/ecommerce-pipeline.svg'
 import logoSecurityLeads from '@/images/logos/security-leads.svg'
 
 const projects = [
@@ -13,6 +14,13 @@ const projects = [
       'SaaS tool for website security monitoring. Helps digital agencies track SSL certificates, security headers, and email authentication across all client domains — before clients find out the hard way.',
     link: { href: 'https://achilleus.so', label: 'achilleus.so' },
     logo: logoAchilleus,
+  },
+  {
+    name: 'E-commerce Lead Generation Pipeline',
+    description:
+      'Full Clay workflow that takes raw company names through e-commerce qualification (BuiltWith + Claygent), contact discovery, a 5-provider email waterfall, and AI-generated personalized opening lines — 42 verified emails from 64 contacts at ~330 credits total.',
+    link: { href: 'https://clay.com', label: 'clay.com' },
+    logo: logoEcommercePipeline,
   },
   {
     name: 'Security Lead Scorer',
