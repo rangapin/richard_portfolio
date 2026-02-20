@@ -1,0 +1,133 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Richard Angapin',
+  date: '2026-02-18',
+  title: 'The GTM Engineer skill map for 2026',
+  description:
+    'Job postings are up 205% year-over-year, but the talent pipeline remains thin. Here\'s what recruiters actually screen for — from table stakes to premium differentiators.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+GTM Engineering has become the most in-demand hybrid role in B2B tech, with over 3,000 active listings on LinkedIn as of January 2026. The role barely existed in 2023. The defining challenge for recruiters: finding candidates who can write Python and SQL, orchestrate AI workflows in Clay, and still think like a revenue leader.
+
+This breakdown synthesizes data from Bloomberry's analysis of 1,000+ job postings, FullFunnel's tracking of 1,570+ practitioner profiles, and recruiter insights from Betts Recruiting and Captivate Talent.
+
+## The technical skills recruiters actually screen for
+
+The top responsibility across all postings is "build and automate GTM workflows," followed by "integrate GTM tech stack tools" and "own/optimize the CRM." Three programming languages dominate.
+
+**SQL and Python each appear in 38% of postings** — making them the most-cited hard skills. SQL powers CRM querying, pipeline diagnostics, and data warehouse reporting. Python drives automation scripts, custom API integrations, and LLM workflow orchestration. JavaScript/TypeScript rounds out the trio, particularly at developer-tool companies.
+
+API integration is functionally universal. GTM Engineers build webhooks, middleware, and custom connectors that sync data across 15+ tools. Data manipulation skills — ETL pipelines, waterfall enrichment, data hygiene, lead scoring models — are core to nearly every job description.
+
+The critical nuance: coding separates entry-level roles from senior positions. Many postings note that "basic scripting knowledge is helpful but not always required," signaling that non-coders can enter through no-code tools — but the highest-paying positions explicitly require Python and SQL fluency.
+
+## Platform expertise by category
+
+Clay is the undisputed centerpiece. It appeared in the majority of job postings and showed up on 90%+ of GTM Engineer LinkedIn profiles. Beyond Clay, the landscape breaks into six categories:
+
+**CRM platforms** split almost evenly: HubSpot at 52% and Salesforce at 45%. The practical reality is that recruiters expect proficiency in at least one and familiarity with both.
+
+**Sales engagement** is led by Outreach at 49% of postings, followed by SalesLoft and Gong at 23% for conversation intelligence.
+
+**Automation platforms:** Zapier at 39% still leads, but n8n at 28% is surging — particularly for AI agent workflows and self-hosted deployments. The Clay community frequently lists "Clay, n8n, and Make" as must-have skills together.
+
+**Data enrichment and prospecting** includes Apollo at 29%, ZoomInfo, Clearbit, Lusha, and FullEnrich for waterfall enrichment. 43% of companies hiring GTM Engineers use a visitor identification product (6Sense, RB2B, Warmly). 35% use intent data platforms.
+
+**Outbound/cold email tools** — Instantly, Smartlead, Saleshandy — are critical in practice but appear less frequently in formal postings. Email deliverability knowledge (SPF/DKIM/DMARC configuration, domain warmup, inbox rotation) is a high-value sub-skill.
+
+**Analytics and BI** are led by Looker at 17%, with Tableau, Google Analytics, Mixpanel, and PostHog for dashboards and attribution.
+
+## AI skills have crossed from differentiator to standard requirement
+
+The data is unambiguous: approximately 60% of new GTM Engineer profiles now reference AI enablement, up from roughly 40% in September 2025. Clay CEO Kareem Amin has called GTM Engineering "the first true AI-native profession."
+
+Recruiters now screen for **prompt engineering** (particularly within Clay's AI features and Claygent), **AI agent design and deployment** for prospect research and outbound personalization, and **LLM API integration** via OpenAI and Claude APIs for custom workflows.
+
+The AI skill spectrum has clear tiers. Basic AI tool usage and prompt engineering are now table stakes. Advanced AI workflow orchestration — building multi-step agent pipelines, integrating LLM calls in Python, designing self-optimizing sequences — remains a strong differentiator.
+
+Emerging AI skills for 2026–2027: multi-agent system orchestration, MCP (Model Context Protocol) for agent interoperability, vector databases and RAG architectures for prospect knowledge bases, and LLM fine-tuning for brand-specific outreach.
+
+## Business acumen separates great from good
+
+Technical skills get the headlines, but every recruiter emphasizes that commercial judgment is the true differentiator. Clay's hiring guide describes the ideal candidate as "half commercial thinker, half builder" who constantly asks, "Does this workflow actually help someone close a deal?"
+
+The non-technical skills recruiters screen for:
+
+**Pipeline and revenue metrics fluency** — understanding conversion rates at every funnel stage, pipeline velocity, CAC, LTV, win rates, and sales cycle length. Not just defining them, but understanding how they influence each other and what changes improve them.
+
+**ICP development and lead scoring** — GTM Engineers don't typically define ICPs from scratch, but they operationalize them through firmographic/technographic enrichment workflows, intent signal integration, and propensity scores.
+
+**Cross-functional communication** — translating technical solutions for sales, marketing, and leadership audiences is possibly the most underrated skill.
+
+**GTM strategy knowledge** — buyer personas, ABM fundamentals, positioning. Not for strategy creation, but for operationalization.
+
+## What's table stakes versus what commands a premium
+
+**Table stakes (must-have to get hired):**
+- CRM mastery in Salesforce or HubSpot
+- Workflow automation via Zapier/Make/n8n
+- Clay proficiency
+- Data enrichment fundamentals including waterfall logic
+- Basic AI tool usage and prompt engineering
+- API and webhook understanding
+- Sales/marketing funnel knowledge
+- Outbound/prospecting systems knowledge
+
+**Current differentiators:**
+- Python and SQL programming (each in 38% of postings but rare among ops professionals)
+- Advanced AI workflow orchestration with LLM APIs
+- Custom integration building beyond no-code tools
+- Data pipeline engineering with Snowflake and dbt
+- Predictive lead scoring with ML models
+- Deep technical skill plus revenue-minded business thinking
+
+**Emerging skills (will define the next wave):**
+- Multi-agent system design
+- MCP protocol fluency
+- Vector databases and RAG for GTM applications
+- Real-time event-driven data processing
+- LLM fine-tuning for industry-specific use cases
+
+## Certifications that actually move the needle
+
+No standardized certification is required. The universal consensus: **portfolio of real projects with quantifiable impact matters far more than any credential**.
+
+**Clay University certifications** are the single most valued credential in the ecosystem. Four tracks — AI, Outbound, Inbound, and CRM Enrichment — each requiring submission of a working Clay table.
+
+**Salesforce Administrator** certification provides foundational CRM credibility and is sometimes explicitly required. **HubSpot Academy certifications** — particularly Marketing Hub and Revenue Operations tracks — are free and widely recommended.
+
+The practical strategy: earn Clay University certification first, add one major CRM cert, then invest heavily in building and publicly documenting real projects. The "build in public" ethos — sharing workflows on LinkedIn, posting in Clay community Slack, writing about what you've built — is more effective than any additional credential.
+
+## Career paths into GTM Engineering
+
+The most common entry paths:
+
+**SDR/BDR to GTM Engineer** — sales reps who taught themselves Clay and automation to hit quota, built workflows their teams adopted, and transitioned formally.
+
+**RevOps/Sales Ops** — expanding from CRM administration and reporting into workflow automation and AI.
+
+**Startup generalist** — wearing multiple hats forces cross-functional skill development.
+
+Career progression follows two tracks: the IC track (GTM Associate → Senior → Lead/Principal) or management track (Head of GTM Engineering → Director of RevOps → VP). A growing third path is independent practice — launching a Clay-focused agency or working as a fractional GTM Engineer.
+
+The communities that matter: Clay Community Slack, GTM Engineering Slack Group via Cargo, RevOps Co-op, Databar Discord, and LinkedIn for building in public.
+
+## The talent gap is severe
+
+With 205% year-over-year growth in postings and a role that didn't exist until 2023, talent pipelines simply haven't caught up. The hardest-to-find skills fall into three buckets:
+
+**Technical scarcity:** SQL and Python proficiency among people with ops backgrounds, API integration skills that bridge pure ops and pure engineering, and AI/LLM workflow orchestration.
+
+**Hybrid scarcity:** the combination of coding ability plus Clay/automation mastery plus CRM expertise plus revenue-minded business thinking — finding all four in one person is extremely difficult.
+
+**Structural scarcity:** title inconsistency makes sourcing hard (candidates use RevOps Engineer, Growth Engineer, Marketing Developer), many skilled practitioners prefer freelance/agency work, and there's no formal training pipeline.
+
+The market window is open. Three years into this role's existence, demand is at 205% growth while formal training pipelines remain nonexistent.

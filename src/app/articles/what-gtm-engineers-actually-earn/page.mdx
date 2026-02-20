@@ -1,0 +1,71 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Richard Angapin',
+  date: '2026-02-18',
+  title: 'What GTM Engineers actually earn — the 2025 breakdown',
+  description:
+    'GTM Engineering barely existed in 2023. By 2025, job postings surged 205% year-over-year and total compensation is hitting $130K–$250K+. Here\'s what the data actually says — and where it\'s thin.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+GTM Engineering barely existed as a formal role in 2023. By 2025, job postings had surged 205% year-over-year, with OpenAI, Vercel, Ramp, and Clay itself leading hiring. Total US compensation now sits at **$130K–$250K+** — 20–40% above traditional RevOps and Sales Ops roles. Here's what the data actually says.
+
+## The salary spectrum
+
+Compensation varies dramatically based on seniority, technical depth, and whether the role involves running existing workflows versus designing full GTM infrastructure.
+
+**Entry-level (0–2 years):** $70K–$90K base, $80K–$110K total comp. These roles execute existing Clay workflows, manage enrichment sequences, and handle basic CRM hygiene. Data is thin here — Bloomberry's analysis of 1,000+ job postings found companies typically require an average of 4.11 years of experience.
+
+**Mid-level (2–5 years):** $90K–$140K base, $120K–$175K total comp. This is where most hiring happens. Practitioners build multi-step Clay tables, integrate APIs, write Python/SQL for custom enrichment, and own outbound workflow design. The median posted salary from Bloomberry lands at **$127,500**.
+
+**Senior/Lead (5+ years):** $130K–$250K base, $200K–$310K+ total comp. Betts Recruiting reports variable compensation at 25–30% of base for senior GTM Engineers — significantly higher than the 10–20% typical for RevOps managers. At this level, you're designing entire GTM infrastructure: data warehousing, reverse ETL, scoring models, multi-channel orchestration.
+
+The companies paying at the top of the range tell a clear story: Vercel at $252K median, OpenAI at $250K, Clay itself at $175K. The defining skill stack that commands premium pay combines Clay, Python/SQL, both HubSpot and Salesforce fluency, API integration, and data warehouse experience. Pure "tool operators" pay materially less.
+
+## Geography still matters — even for remote roles
+
+Remote US roles average $174K total comp (Glassdoor, 18 salaries), suggesting remote GTM Engineers capture close to hub-level pay. San Francisco roles average $234K, NYC runs $185K–$215K for mid-career practitioners.
+
+**Europe lags significantly.** As Sifted.eu bluntly noted in 2025: "Salary benchmarks for GTM engineers in Europe currently don't exist as there isn't yet enough data." The Revenue Operations Alliance found North American RevOps professionals average $167K versus $96K in Europe — a roughly 42% discount. Germany, the Netherlands, and France likely fall in the €55K–€90K base range for mid-level roles.
+
+This creates a notable arbitrage opportunity: European practitioners serving US clients remotely can earn multiples of local market rates.
+
+## Freelance rates and the Clay retainer economy
+
+The freelance market has matured into a viable career path. Three tiers have emerged:
+
+- **Junior Clay operators:** $30–$60/hour (US), $15–$30/hour (international)
+- **Mid-level builders:** $60–$100/hour (US), $30–$60/hour (international)
+- **Senior certified experts:** $100–$200+/hour (US), $50–$100/hour (international)
+
+Monthly retainers are where serious revenue concentrates:
+
+- Basic Clay lead generation: $1,000–$2,000/month
+- Standard outbound management: $3,000–$5,000/month
+- Comprehensive GTM services: $5,000–$9,000/month
+- Enterprise engagements: $10,000–$12,000+/month
+
+A solo Clay consultant with three $5K–$8K/month retainers generates $180K–$288K in annual revenue. The upper end of these figures comes largely from self-reported testimonials — treat them with appropriate skepticism.
+
+## Why the premium exists
+
+GTM Engineer compensation sits meaningfully above traditional operations roles and roughly on par with pre-sales engineering. The divergence from RevOps tracks directly with AI tool adoption — a PwC analysis found workers with AI skills earn up to 56% more than peers in identical roles.
+
+Bloomberry's analysis found that 9 out of 10 responsibilities in GTM Engineer job descriptions also appear in RevOps postings. The work is substantially similar. The salary premium comes from the engineering layer — Clay proficiency appears in 60%+ of GTM Engineer postings, Python/SQL in 38% each. The ability to implement AI-powered automation rather than just manage existing tools is what the market is actually paying for.
+
+Traditional Sales Ops and Marketing Ops salaries are stagnating — Salary.com shows median declines of $1K–$2K from 2023 to 2025. GTM Engineering is going the other direction.
+
+## The honest caveat
+
+The data has real holes. GTM Engineer-specific salary figures on Glassdoor rely on just 19 US salary submissions. European compensation is essentially uncharted. Freelance pricing comes largely from community estimates.
+
+The sustainability question is real too. Prompt engineering salaries hit $375K in 2023 before demand compressed as the skill became ubiquitous. GTM Engineering may follow a similar arc — though practitioners argue the role's blend of technical and business skills makes it more durable than a single-tool specialty.
+
+Current trajectory: the window for premium compensation is open now, driven by scarcity. For practitioners combining Clay with deeper technical skills, the market is still pricing in that scarcity. For those who remain pure tool operators, commoditization is the more likely outcome.
