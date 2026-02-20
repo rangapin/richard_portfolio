@@ -7,20 +7,23 @@ import logoAchilleus from '@/images/logos/achilleus.svg'
 import logoEcommercePipeline from '@/images/logos/ecommerce-pipeline.svg'
 import logoSecurityLeads from '@/images/logos/security-leads.svg'
 
-const projects = [
-  {
-    name: 'Achilleus',
-    description:
-      'SaaS tool for website security monitoring. Helps digital agencies track SSL certificates, security headers, and email authentication across all client domains — before clients find out the hard way.',
-    link: { href: 'https://achilleus.so', label: 'achilleus.so' },
-    logo: logoAchilleus,
-  },
+const gtmProjects = [
   {
     name: 'E-commerce Lead Generation Pipeline',
     description:
       'Full Clay workflow that takes raw company names through e-commerce qualification (BuiltWith + Claygent), contact discovery, a 5-provider email waterfall, and AI-generated personalized opening lines — 42 verified emails from 64 contacts at ~330 credits total.',
     link: { href: 'https://clay.com', label: 'clay.com' },
     logo: logoEcommercePipeline,
+  },
+]
+
+const techProjects = [
+  {
+    name: 'Achilleus',
+    description:
+      'SaaS tool for website security monitoring. Helps digital agencies track SSL certificates, security headers, and email authentication across all client domains — before clients find out the hard way.',
+    link: { href: 'https://achilleus.so', label: 'achilleus.so' },
+    logo: logoAchilleus,
   },
   {
     name: 'Security Lead Scorer',
@@ -42,6 +45,29 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
+function ProjectCard({ project }: { project: (typeof gtmProjects)[0] }) {
+  return (
+    <Card as="li">
+      <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+        <Image
+          src={project.logo}
+          alt=""
+          className="h-8 w-8"
+          unoptimized
+        />
+      </div>
+      <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
+        <Card.Link href={project.link.href}>{project.name}</Card.Link>
+      </h2>
+      <Card.Description>{project.description}</Card.Description>
+      <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-500 dark:text-zinc-200">
+        <LinkIcon className="h-6 w-6 flex-none" />
+        <span className="ml-2">{project.link.label}</span>
+      </p>
+    </Card>
+  )
+}
+
 export const metadata: Metadata = {
   title: 'Projects',
   description: "Things I've built. So far.",
@@ -51,33 +77,36 @@ export default function Projects() {
   return (
     <SimpleLayout
       title="Things I've built. So far."
-      intro="I build tools that solve problems I've actually run into. Achilleus came from watching agencies get burned by SSL expiries and security misconfigurations they didn't know about until a client called angry. More projects in the pipeline."
+      intro="GTM workflows built in Clay, and tools written in code. Two different outputs, same underlying obsession with making systems work."
     >
-      <ul
-        role="list"
-        className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        {projects.map((project) => (
-          <Card as="li" key={project.name}>
-            <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <Image
-                src={project.logo}
-                alt=""
-                className="h-8 w-8"
-                unoptimized
-              />
-            </div>
-            <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-              <Card.Link href={project.link.href}>{project.name}</Card.Link>
-            </h2>
-            <Card.Description>{project.description}</Card.Description>
-            <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-500 dark:text-zinc-200">
-              <LinkIcon className="h-6 w-6 flex-none" />
-              <span className="ml-2">{project.link.label}</span>
-            </p>
-          </Card>
-        ))}
-      </ul>
+      <div className="space-y-20">
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+            GTM & Outbound
+          </h2>
+          <ul
+            role="list"
+            className="mt-8 grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {gtmProjects.map((project) => (
+              <ProjectCard key={project.name} project={project} />
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+            Tools & Code
+          </h2>
+          <ul
+            role="list"
+            className="mt-8 grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {techProjects.map((project) => (
+              <ProjectCard key={project.name} project={project} />
+            ))}
+          </ul>
+        </div>
+      </div>
     </SimpleLayout>
   )
 }
