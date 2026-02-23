@@ -6,8 +6,16 @@ import { SimpleLayout } from '@/components/SimpleLayout'
 import logoAchilleus from '@/images/logos/achilleus.svg'
 import logoEcommercePipeline from '@/images/logos/ecommerce-pipeline.svg'
 import logoSecurityLeads from '@/images/logos/security-leads.svg'
+import logoMpcRecruitment from '@/images/logos/mpc-recruitment.svg'
 
 const gtmProjects = [
+  {
+    name: 'MPC Recruitment Outbound System',
+    description:
+      'Multi-table Clay architecture that scrapes LinkedIn job postings, qualifies companies, finds decision makers based on company size, enriches contacts through a 5-provider email waterfall, generates personalized cold emails, and pushes campaign-ready data to Smartlead — with cache tables to eliminate duplicate enrichment across runs.',
+    link: { href: '/projects/mpc-recruitment-outbound-system', label: 'Case study' },
+    logo: logoMpcRecruitment,
+  },
   {
     name: 'E-commerce Lead Generation Pipeline',
     description:
