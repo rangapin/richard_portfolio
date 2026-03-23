@@ -7,6 +7,7 @@ import logoAchilleus from '@/images/logos/achilleus.svg'
 import logoEcommercePipeline from '@/images/logos/ecommerce-pipeline.svg'
 import logoSecurityLeads from '@/images/logos/security-leads.svg'
 import logoMpcRecruitment from '@/images/logos/mpc-recruitment.svg'
+import logoTheLine from '@/images/logos/the-line.svg'
 
 const gtmProjects = [
   {
@@ -39,6 +40,13 @@ const techProjects = [
       'Python CLI tool that scans domains for SSL issues, missing security headers, and DNS misconfigurations, then scores them 0–100 by security posture. Higher score = worse security = better prospect. Generates talking points for outreach automatically.',
     link: { href: '/projects/security-lead-scorer', label: 'Case study' },
     logo: logoSecurityLeads,
+  },
+  {
+    name: 'The Line',
+    description:
+      'Community forum for the international freediving community. A place for freedivers to connect, share training knowledge, discuss competitions, and help each other progress in the sport.',
+    link: { href: '/projects/the-line', label: 'Case study' },
+    logo: logoTheLine,
   },
 ]
 

@@ -1,0 +1,35 @@
+import { ProjectLayout } from '@/components/ProjectLayout'
+
+export const project = {
+  title: 'The Line',
+  description:
+    'Community forum for the international freediving community. A place for freedivers to connect, share training knowledge, discuss competitions, and help each other progress in the sport.',
+  link: 'https://theline.to',
+}
+
+export const metadata = {
+  title: project.title,
+  description: project.description,
+}
+
+export default (props) => <ProjectLayout project={project} {...props} />
+
+## The problem
+
+Freediving is a niche sport with a passionate global community, but no dedicated English-speaking forum to call home. Discussions were scattered across subreddits, Facebook groups, and Discord servers — fragmented, hard to search, and lacking the depth a technical sport like freediving deserves.
+
+## What I built
+
+The Line is a community forum built specifically for international freedivers. It gives the community a dedicated space to discuss training methodology, competitions, gear, and technique — with proper threading, tagging, and search so knowledge doesn't get lost.
+
+Features include:
+
+- **Thread-based discussions** organised by training, competitions, gear, and more
+- **Tagging system** for topics like pool-training, competition, and beginner
+- **User profiles** with posting history
+- **Voting and engagement** to surface the best content
+- **Search** to find relevant discussions quickly
+
+## Why it matters
+
+Freediving has a knowledge problem. Hard-won experience about breath-hold training, equalisation technique, and competition prep lives in the heads of experienced divers — and rarely gets written down in a way newcomers can find. The Line is built to change that: a permanent, searchable home for the sport's collective knowledge.
