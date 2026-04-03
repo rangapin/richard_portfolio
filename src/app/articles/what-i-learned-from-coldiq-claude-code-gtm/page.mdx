@@ -1,0 +1,162 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Richard Angapin',
+  date: '2026-04-03',
+  title: 'What I Learned From ColdIQ: The Claude Code Shift in GTM Engineering',
+  description: 'ColdIQ\'s GTM team showed how Claude Code connects every part of a cold email system — from list scoring to copy generation to results analysis. Here\'s what shifted for me.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+I spent the last week deep in ColdIQ's Claude Code webinar. Kenny, their head of GTM, showed how they're automating entire cold email campaigns - from list building through copy generation to campaign deployment. It changed how I think about what's possible with automation.
+
+The gap between "configure a tool" and "own the entire system" is exactly where Claude Code lives.
+
+---
+
+## The Problem With Tool Silos
+
+Most GTM teams build campaigns like this:
+
+1. List building (Apollo or similar)
+2. Enrichment (Clay, ZoomInfo, etc.)
+3. Copy writing (manual, or AI tool)
+4. Sequencing (Instantly, Smartlead)
+5. Analysis (spreadsheet)
+
+Each tool is working with the same data, but they're isolated. List building tool doesn't know what copy you used. Copy tool doesn't know who actually replied. Sequencer doesn't know why someone bounced.
+
+The data exists in all these places but it's not connected. That disconnection costs you speed, quality, and insights.
+
+---
+
+## How ColdIQ Uses Claude Code To Connect Everything
+
+Kenny showed a different approach:
+
+**One system. All context.**
+
+Instead of tools talking to tools, Claude Code becomes the central nervous system. Everything feeds into it. Everything references it.
+
+Here's what that looks like:
+
+1. **List in** → Claude Code scores by ICP
+2. **Score data** → Claude Code enriches with context
+3. **Context stored** → Claude Code references it for copy
+4. **Copy generated** → Claude Code personalizes based on what it knows
+5. **Results in** → Claude Code learns and adjusts next time
+
+The key insight: Claude isn't just generating copy. It's the repository. It's learning from the data. It's making decisions based on everything that came before.
+
+---
+
+## Why This Matters For Speed
+
+ColdIQ went from taking 1-2 weeks to set up a campaign to taking hours.
+
+Not because Claude Code is faster at writing. But because:
+
+- ICP scoring is instant (not manual)
+- Enrichment runs in batch (not sequential)
+- Copy generation has all the context (not guessing)
+- Sequencing is automatic (not manual setup)
+- Results feed back into the next cycle (not ignored)
+
+A campaign that took 10 hours of manual work now takes 2 hours of setup + monitoring.
+
+---
+
+## The Real Lesson: Context Is The Leverage
+
+Kenny kept saying the same thing: "Everything is connected."
+
+That's not a technical feature. That's a business insight.
+
+Most campaigns fail because:
+
+- You don't know why someone didn't reply (was it the copy? The timing? Wrong person?)
+- You can't personalize at scale (you have copy, but not context)
+- You're optimizing the wrong thing (open rates instead of reply rates)
+
+When everything is connected in Claude Code, you see the actual levers.
+
+Deliverability dropped? You know it's a domain issue, not a copy issue.
+Reply rate is low? You know it's copy or timing, not targeting.
+Conversions are low? You know it's qualification or follow-up, not initial outreach.
+
+The system tells you exactly what to fix because it knows exactly what happened.
+
+---
+
+## What This Changes For My Work
+
+Three things shifted for me:
+
+**1. Stop thinking in features. Think in systems.**
+
+Clay is powerful. Instantly is powerful. Claude Code is powerful. But the power comes from how they talk to each other, not from any single tool.
+
+Building a campaign means architecting a system where every piece has context about every other piece.
+
+**2. The real differentiation is automation of thinking, not automation of work.**
+
+ColdIQ isn't using Claude Code to write faster emails. They're using it to make better decisions about *which* prospects to target, *when* to send, *what* to say based on actual data.
+
+That's not efficiency. That's intelligence.
+
+**3. Documentation and process are the actual product.**
+
+Kenny shared the exact workflow. The exact prompts. The exact sequence. Not because they wanted to teach people, but because once you have a documented process, you can iterate on it, improve it, and scale it.
+
+The secret sauce isn't the tool. It's the thinking behind how you use it.
+
+---
+
+## The One Thing I'm Taking Away
+
+One line stuck with me from Kenny:
+
+"Claude Code is able to pick these things up, learn it, and then help you automate the process."
+
+Not *configure* the process. Not *execute* the process. **Learn** the process.
+
+That's the difference. A tool follows rules. Claude Code learns patterns from your data and adjusts based on what works.
+
+That's why ColdIQ can manage 10+ clients simultaneously. They're not manually running each campaign. They built a system that learns from each campaign and applies those lessons to the next one.
+
+---
+
+## What's Next For Me
+
+I'm taking three specific things from this:
+
+1. **Build campaigns as systems, not sequences of steps.** Every piece of data should inform every decision that comes after.
+
+2. **Document the thinking, not just the execution.** If I can explain why a campaign structure works, I can iterate and improve it. If I just execute a playbook, I'm stuck.
+
+3. **Use Claude Code as the connective tissue.** Not as a replacement for Clay or Instantly. As the thing that makes them actually talk to each other and learn.
+
+The agencies winning right now aren't using better tools. They're using the tools they have in smarter ways.
+
+ColdIQ showed what that looks like.
+
+---
+
+## The Uncomfortable Truth
+
+This is hard to do right. It requires:
+
+- Understanding your data deeply
+- Building proper architecture (not spaghetti flows)
+- Writing good prompts (so Claude understands context)
+- Iterating based on results (not fire-and-forget)
+
+Most people won't do this. Most people will configure a tool and call it a day.
+
+But that's the gap. That's where the real leverage is.
