@@ -3,7 +3,6 @@ import Image from 'next/image'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import logoAchilleus from '@/images/logos/achilleus.svg'
 import logoEcommercePipeline from '@/images/logos/ecommerce-pipeline.svg'
 import logoSecurityLeads from '@/images/logos/security-leads.svg'
 import logoMpcRecruitment from '@/images/logos/mpc-recruitment.svg'
@@ -27,13 +26,6 @@ const gtmProjects = [
 ]
 
 const techProjects = [
-  {
-    name: 'Achilleus',
-    description:
-      'SaaS tool for website security monitoring. Helps digital agencies track SSL certificates, security headers, and email authentication across all client domains — before clients find out the hard way.',
-    link: { href: '/projects/achilleus', label: 'Case study' },
-    logo: logoAchilleus,
-  },
   {
     name: 'Security Lead Scorer',
     description:

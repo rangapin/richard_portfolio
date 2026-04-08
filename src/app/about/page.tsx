@@ -79,11 +79,10 @@ export default function About() {
             </p>
             <p>
               I started where most technical people start — tinkering. I messed
-              around with Claude Code, built things, shipped Achilleus, a
-              security monitoring tool for digital agencies. Then came the part
-              nobody warns you about: building something is the easy part.
-              Marketing it is another discipline entirely. I had a product and
-              no idea how to get it in front of people.
+              around with Claude Code, built things, shipped projects. Then came
+              the part nobody warns you about: building something is the easy
+              part. Marketing it is another discipline entirely. I had products
+              and no idea how to get them in front of people.
             </p>
             <p>
               That&apos;s how I found Clay. And through Clay, GTM engineering.

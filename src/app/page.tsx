@@ -9,7 +9,6 @@ import {
   GitHubIcon,
   LinkedInIcon,
 } from '@/components/SocialIcons'
-import logoAchilleus from '@/images/logos/achilleus.svg'
 import logoQuable from '@/images/logos/quable.svg'
 import logoRoiHunter from '@/images/logos/roihunter.svg'
 import logoRunItOnce from '@/images/logos/runitonce.svg'
@@ -187,16 +186,6 @@ function Role({ role }: { role: Role }) {
 
 function Resume() {
   let resume: Array<Role> = [
-    {
-      company: 'Achilleus',
-      title: 'Founder',
-      logo: logoAchilleus,
-      start: '2025',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
     {
       company: 'Quable',
       title: 'Technical Support Specialist',
