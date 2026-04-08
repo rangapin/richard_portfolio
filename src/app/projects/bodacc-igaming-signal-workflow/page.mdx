@@ -1,0 +1,218 @@
+import { ProjectLayout } from '@/components/ProjectLayout'
+
+export const project = {
+  title: 'BODACC iGaming Signal Workflow',
+  description:
+    'Signal-based outbound workflow that monitors French public legal data (BODACC) for corporate transformation events at iGaming B2B vendors, scores companies by transformation intensity, enriches decision-maker contacts, and generates personalized cold emails in French referencing real legal events.',
+}
+
+export const metadata = {
+  title: project.title,
+  description: project.description,
+}
+
+export default (props) => <ProjectLayout project={project} {...props} />
+
+## The brief
+
+French iGaming B2B vendors — payment processors, compliance tools, platform suppliers, marketing agencies serving ANJ-licensed operators — go through constant corporate restructuring. Regulatory pressure from the July 2025 tax increase and pending casino legalization drives capital raises, director appointments, and legal form transformations. These events are published in the BODACC (Bulletin Officiel des Annonces Civiles et Commerciales), a government gazette that has existed since 1955.
+
+Nobody runs this data through Clay for outbound. The goal was to build a workflow that monitors BODACC events daily, scores companies by transformation intensity over a rolling 90-day window, enriches only the companies that earn it, and generates cold emails in French that reference the exact legal events the recipient has never been pitched on before.
+
+The target universe is narrow on purpose: roughly 150-300 French-registered entities. I spent 15 years in the iGaming industry before moving to GTM engineering, which makes the targeting and copy credible in ways a generic agency could not replicate.
+
+## Architecture overview
+
+Four Clay tables plus a people cache table, fed by two free public data sources. The key design constraint is credit conservation: the free data layer (BODACC via data.gouv) handles all monitoring and scoring. Paid enrichment (Pappers) only fires when a company crosses the score threshold.
+
+**Table 1: SIREN Master List** — Static base list of target companies. Built once from Pappers search UI filtered by NAF codes and iGaming keywords, supplemented with manual additions from industry knowledge.
+
+**Table 2: BODACC Events** — Populated daily via HTTP call to data.gouv's BODACC API. One row per event, linked to SIREN. Each event gets a weighted score.
+
+**Table 3: Scored Companies** — Aggregates events per SIREN over a 90-day window. Applies compound multipliers for clustered events. Triggers Pappers enrichment only when the composite score crosses the threshold.
+
+**Table 4: People + Outreach** — One row per contact. Receives data from Table 3 when a company is ready for outreach. Generates the personalized email from six fixed templates based on which events fired.
+
+**Table 5: Enriched People** — Cache. Stores previously enriched contacts keyed on LinkedIn URL to prevent duplicate enrichment.
+
+## Table 1: SIREN Master List
+
+The starting list of companies to monitor. Each row contains a company name, SIREN (the 9-digit French company identifier), NAF code, domain, and a manual tier assignment based on relevance to the iGaming ecosystem.
+
+The list was built by querying Pappers with NAF code filters — `6201Z` (software publishing), `6202A` (IT consulting), `9200Z` (gambling and betting activities), `6311Z` (data processing and hosting), `7311Z` (advertising agencies) — then filtering by company descriptions containing "jeux", "paris sportifs", "gaming", "ANJ", or "ARJEL".
+
+Known anchor companies seeded the list: Sportradar AG France, Honoré Gaming / Sportytote, Neosurf, and BetConstruct France. The rest came from Pappers search results and industry knowledge.
+
+A `last_enriched` date column tracks when each company was last enriched through Pappers to avoid repeat credit spend across runs.
+
+<img src="/projects/bodacc-igaming-signal-workflow/table-1-siren-master.png" alt="Clay Table 1 showing SIREN master list with 25 iGaming companies including Sportradar, Honore Gaming, Playtech, Novomatic, PMU, Betclic, Winamax, and others" className="rounded-2xl" />
+
+## Table 2: BODACC Events
+
+### Data source
+
+A daily HTTP call to the data.gouv BODACC API, run against each SIREN in Table 1:
+
+```
+GET https://bodacc-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/annonces-commerciales/records
+?where=registre_num={{siren}}
+&order_by=dateparution DESC
+&limit=20
+```
+
+Each event arrives with the SIREN, company name, event type, publication date, and raw event details. The API is free with no credit cost.
+
+### Event classification
+
+Events are classified into types that map to the BODACC structure:
+
+- `MODIFICATION` — capital changes, director appointments, legal form transformations, registered office moves
+- `CREATION` — new company registration
+- `VENTE` — business sale or cession de fonds de commerce
+- `PROCEDURE_COLLECTIVE` — insolvency proceedings
+- `RADIATION` — dissolution
+
+A formula column extracts the event subtype from the raw JSON — distinguishing between an augmentation de capital and a nomination de dirigeant within the broader MODIFICATION category.
+
+### Filtering
+
+Two formula columns gate which events proceed:
+
+- `is_target_siren` — lookup against Table 1 confirming the SIREN exists in the master list
+- `in_90_day_window` — calculated from the publication date, only events within the last 90 days are scored
+
+## Table 3: Scored Companies
+
+### Scoring model
+
+Each event type carries a weight calibrated for the iGaming vertical:
+
+| Event | Weight | Rationale |
+|-------|--------|-----------|
+| Cession de fonds de commerce | +9 | New operator needs every service from scratch |
+| Augmentation de capital | +8 | Fresh budget, growth spend imminent |
+| Transformation de forme juridique (SARL→SAS) | +7 | Almost always precedes fundraise or scale |
+| Nomination de dirigeant | +6 | New DG did not choose incumbent vendors — 30-60 day window |
+| Nouvelle immatriculation | +5 | Brand new entity, everything to buy |
+| Transfert de siège social | +4 | Relocation often accompanies restructuring |
+| Dépôt de comptes annuels (strong growth) | +3 | Financial health signal — only scored if revenue growth exceeds 20% |
+| Procédure collective | -5 | Credit risk, deprioritize |
+
+**Compound multiplier:** If three or more events occur within 30 days, a 1.5x multiplier applies to the total score. A cluster of events in a compressed timeframe signals active transformation rather than routine filings.
+
+**Threshold:** A composite score of 12 or higher in the 90-day window triggers Pappers enrichment. This gate is the core of the credit conservation strategy — BODACC monitoring and scoring are entirely free. Only companies that demonstrate real transformation intensity enter the paid enrichment pipeline.
+
+### Pappers enrichment
+
+When a company crosses the threshold, and only then, a Pappers MCP call pulls:
+
+- Full company profile (capital, legal form, NAF code, headcount tier)
+- Current dirigeants (name, role, appointment date)
+- Capital history (augmentation amounts and dates)
+- Legal form history (transformation timeline)
+- Financial statements (chiffre d'affaires, résultat)
+- Shareholding structure and beneficial owners
+
+The enrichment is gated by two conditions: `score_threshold_met == true` and `pappers_enriched == false`. The second condition prevents re-enriching companies that have already been processed.
+
+A `ready_for_outreach` formula combines three checks: the score threshold is met, Pappers enrichment is complete, and a dirigeant name exists. Only rows passing all three flow to Table 4.
+
+## Table 4: People + Outreach
+
+### Template selection
+
+The AI does not free-write emails. It selects from six fixed templates based on which combination of BODACC events fired for each company:
+
+- **V1** — New director only
+- **V2** — Capital increase only
+- **V3** — Legal form transformation only
+- **V4** — Capital increase + new director
+- **V5** — Legal form transformation + capital increase
+- **V6** — All three (new director + transformation + capital increase)
+
+Each template follows the same structure: open with the specific events stated as bare facts (no congratulations), include a relevant quote from a business thinker (Drucker, Buffett, Churchill, Pasteur, or Andy Grove), and close with a signature. The tone is calm, precise, and slightly disarming.
+
+**Sample output (V6 — all three events):**
+
+```
+Bonjour Thomas,
+
+En 8 semaines, vous avez nommé un nouveau directeur général,
+transformé la structure juridique en SAS, et augmenté le capital
+de 35%. C'est le profil d'une entreprise en mouvement.
+
+Andy Grove écrivait que « le plus grand danger, c'est
+l'immobilisme. »
+
+Bonne journée à vous,
+Richard
+```
+
+The prompt includes all six templates in full and instructs the AI to select exactly one based on the events present, fill in the variables, and output the email body without adding, removing, or rephrasing any sentence. This makes the output deterministic — the same events always produce the same template.
+
+### Subject line generation
+
+A separate AI column generates a subject line in French. Maximum 8 words, referencing the company name and the most significant events. No emojis, no clickbait.
+
+Examples: "Neosurf, 3 signaux en 8 semaines" and "Transformation juridique et nouveau DG chez Sportradar"
+
+### Contact enrichment
+
+The dirigeant name comes from Pappers enrichment in Table 3. LinkedIn URL is found via Claygent search, gated on Pappers enrichment being complete. Email is found manually via LinkedIn or Pappers dirigeant lookup, verified through Findymail or Listmint.
+
+Before running any enrichment, Table 4 checks Table 5 (Enriched People cache) by LinkedIn URL. If the contact exists, the cached data is used.
+
+### Export
+
+Rows with `status = Ready` are pushed to a Google Sheet via Clay's native integration. The sheet contains company name, SIREN, dirigeant name, email, events summary, composite score, email subject, and email body.
+
+## Anti-repeat logic
+
+Three checks prevent duplicate outreach:
+
+1. **People cache (Table 5)** — LinkedIn URL lookup before enrichment
+2. **Already contacted flag** — manually set to true after sending, checked before export
+3. **Email verification** — only contacts with valid or risky verification status proceed
+
+For this demo, the `already_contacted` flag is managed manually in Clay. At scale, this could be automated via webhook.
+
+## Credit conservation strategy
+
+| Step | Credit gate |
+|------|------------|
+| data.gouv BODACC poll | Always runs — free |
+| Pappers MCP enrichment | Only if composite score ≥ 12 |
+| Claygent LinkedIn search | Only if Pappers enriched and person not yet enriched |
+| Email verification | Only if email found and not already verified |
+| AI email generation | Only if email verified is not invalid |
+| Google Sheet push | Only if status is Ready and not yet synced |
+
+The design principle is that free data does the filtering. Paid enrichment only fires on companies that earned their way into the pipeline through scoring.
+
+<img src="/projects/bodacc-igaming-signal-workflow/table-4-people-outreach.png" alt="Clay Table 4 showing 4 qualified leads: PMU Pari Mutuel Urbain, Winamax France, Betclic 2, and Sportytote with dirigeant names, events summary, and composite scores" className="rounded-2xl" />
+
+## Results
+
+Starting from 25 companies monitored over 180 days of BODACC data:
+
+- 25 companies in the SIREN master list
+- BODACC events polled daily at zero cost
+- 4 companies crossed into the outreach pipeline: PMU Pari Mutuel Urbain, Winamax France, Betclic 2, and Sportytote
+- Composite scores ranging from 6 to 40
+- Low volume, high precision — every row earned its place
+
+## What makes this different
+
+The email that comes out of this pipeline references facts the recipient has never been pitched on before. "Passage en SAS et augmentation de capital de 35% dans le même mouvement." That sentence cannot be produced from Apollo or LinkedIn data. It comes from a government gazette that most outbound teams have never heard of.
+
+The compound scoring model is new. Individual BODACC events are monitored by tools like Mixdata and Prospkt, but scoring across event types with cluster multipliers and using the composite score to gate enrichment spend is an approach that does not exist in any current tool.
+
+Two public data sources. Zero proprietary data. RGPD-compliant by design. Native French copy that is not translated English, targeting an industry vertical where 15 years of context makes the difference between credible outreach and noise.
+
+## Tools used
+
+- **Clay** — core platform for table logic, scoring, enrichment gating, and AI email generation
+- **data.gouv BODACC API** — daily event monitoring (free)
+- **Pappers MCP** — company enrichment (free trial, then API credits)
+- **Findymail / Listmint** — email verification
+- **Google Sheets** — output display and review

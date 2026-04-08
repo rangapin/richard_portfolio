@@ -6,6 +6,7 @@ import { SimpleLayout } from '@/components/SimpleLayout'
 import logoEcommercePipeline from '@/images/logos/ecommerce-pipeline.svg'
 import logoSecurityLeads from '@/images/logos/security-leads.svg'
 import logoMpcRecruitment from '@/images/logos/mpc-recruitment.svg'
+import logoBodaccIgaming from '@/images/logos/bodacc-igaming.svg'
 import logoTheLine from '@/images/logos/the-line.svg'
 
 const gtmProjects = [
@@ -22,6 +23,13 @@ const gtmProjects = [
       'Full Clay workflow that takes raw company names through e-commerce qualification (BuiltWith + Claygent), contact discovery, a 5-provider email waterfall, and AI-generated personalized opening lines — 42 verified emails from 64 contacts at ~330 credits total.',
     link: { href: '/projects/ecommerce-lead-generation-pipeline', label: 'Case study' },
     logo: logoEcommercePipeline,
+  },
+  {
+    name: 'BODACC iGaming Signal Workflow',
+    description:
+      'Signal-based outbound that monitors French public legal data for corporate transformation events at iGaming B2B vendors, scores companies by transformation intensity, and generates personalized cold emails in French referencing real legal events.',
+    link: { href: '/projects/bodacc-igaming-signal-workflow', label: 'Case study' },
+    logo: logoBodaccIgaming,
   },
 ]
 
