@@ -1,4 +1,4 @@
-# Richard Rangapin — Portfolio
+# Richard Angapin — Portfolio
 
 Personal portfolio and writing site. Projects, case studies, and articles on GTM engineering, automation, and developer tooling.
 
