@@ -1,48 +1,25 @@
-# Richard's Portfolio
+# Richard Rangapin — Portfolio
 
-Personal portfolio and writing site built with [Next.js](https://nextjs.org) and [Tailwind CSS](https://tailwindcss.com). Showcases projects, case studies, and articles.
+Personal portfolio and writing site. Projects, case studies, and articles on GTM engineering, automation, and developer tooling.
 
-## Getting started
+**Live site:** <!-- add your URL here -->
 
-Install dependencies:
+## What's inside
 
-```bash
-npm install
-```
-
-Create a `.env.local` file in the project root and set your site's public URL:
-
-```
-NEXT_PUBLIC_SITE_URL=https://example.com
-```
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Scripts
-
-- `npm run dev` — start the development server
-- `npm run build` — create a production build
-- `npm run start` — run the production build locally
-- `npm run lint` — lint the project
-
-## Project structure
-
-Source lives in `/src`. Articles and case studies are authored in MDX under `src/app/articles` and `src/app/projects`.
+- **Projects** — case studies on the tools and systems I've built
+- **Articles** — writing on GTM engineering, automation, and sales infrastructure
+- **About** — background and what I'm currently working on
 
 ## Tech stack
 
-- [Next.js 15](https://nextjs.org/docs) (App Router)
-- [React 19](https://react.dev)
-- [Tailwind CSS 4](https://tailwindcss.com/docs)
-- [MDX](https://mdxjs.com) for articles and case studies
-- [Headless UI](https://headlessui.com)
+Next.js 15 (App Router) · React 19 · Tailwind CSS 4 · MDX · Headless UI · Vercel
 
-## License
+## Running locally
 
-Based on the [Spotlight](https://tailwindcss.com/plus) template by Tailwind Plus and licensed under the [Tailwind Plus license](https://tailwindcss.com/plus/license). Portfolio content is © Richard.
+```bash
+npm install
+# Create .env.local and set NEXT_PUBLIC_SITE_URL=http://localhost:3000
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
