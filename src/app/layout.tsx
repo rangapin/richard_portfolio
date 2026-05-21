@@ -1,9 +1,15 @@
 import { type Metadata } from 'next'
+import { Newsreader } from 'next/font/google'
 
 import { Providers } from '@/app/providers'
-import { Layout } from '@/components/Layout'
 
 import '@/styles/tailwind.css'
+
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-newsreader',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -25,13 +31,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
-      <body className="flex h-full bg-zinc-50 dark:bg-black">
-        <Providers>
-          <div className="flex w-full">
-            <Layout>{children}</Layout>
-          </div>
-        </Providers>
+    <html
+      lang="en"
+      className={`${newsreader.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-full bg-white font-serif text-zinc-900 dark:bg-zinc-950 dark:text-zinc-200">
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

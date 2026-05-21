@@ -1,17 +1,20 @@
-import { Card } from '@/components/Card'
-import { Section } from '@/components/Section'
 import { SimpleLayout } from '@/components/SimpleLayout'
+import { TextLink } from '@/components/TextLink'
 
 function ToolsSection({
+  title,
   children,
-  ...props
-}: React.ComponentPropsWithoutRef<typeof Section>) {
+}: {
+  title: string
+  children: React.ReactNode
+}) {
   return (
-    <Section {...props}>
-      <ul role="list" className="space-y-16">
-        {children}
-      </ul>
-    </Section>
+    <section>
+      <h2 className="text-sm font-semibold tracking-widest text-zinc-400 uppercase dark:text-zinc-500">
+        {title}
+      </h2>
+      <ul role="list" className="mt-5 space-y-6">{children}</ul>
+    </section>
   )
 }
 
@@ -25,12 +28,18 @@ function Tool({
   children: React.ReactNode
 }) {
   return (
-    <Card as="li">
-      <Card.Title as="h3" href={href}>
-        {title}
-      </Card.Title>
-      <Card.Description>{children}</Card.Description>
-    </Card>
+    <li>
+      {href ? (
+        <TextLink href={href}>{title}</TextLink>
+      ) : (
+        <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+          {title}
+        </span>
+      )}
+      <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+        {children}
+      </p>
+    </li>
   )
 }
 
@@ -42,10 +51,10 @@ export const metadata = {
 export default function Uses() {
   return (
     <SimpleLayout
-      title="Software I use, gadgets I love, and other things I recommend."
-      intro="Here's the gear and software I rely on daily to run outbound systems, build projects, and stay sharp."
+      title="Uses"
+      intro="The gear and software I rely on daily to run outbound systems, build projects, and stay sharp."
     >
-      <div className="space-y-20">
+      <div className="space-y-12">
         <ToolsSection title="Workstation">
           <Tool
             title="Dell XPS 15 (7590)"
