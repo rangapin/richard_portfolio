@@ -19,7 +19,7 @@ export default async function ArticlesIndex() {
       title="Writing"
       intro="Notes on GTM engineering, outbound systems, and building in public."
     >
-      <ul className="space-y-6">
+      <ul role="list" className="space-y-6">
         {articles.map((article) => (
           <li
             key={article.slug}

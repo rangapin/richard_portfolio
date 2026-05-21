@@ -100,7 +100,7 @@ export default function About() {
       <h2 className="mt-16 text-sm font-semibold tracking-widest text-zinc-400 uppercase dark:text-zinc-500">
         Work
       </h2>
-      <ul className="mt-5 space-y-2.5 text-sm text-zinc-600 dark:text-zinc-400">
+      <ul role="list" className="mt-5 space-y-2.5 text-sm text-zinc-600 dark:text-zinc-400">
         <li className="flex justify-between gap-4">
           <span className="text-zinc-900 dark:text-zinc-100">Quable</span>
           <span>2023 — 2025</span>

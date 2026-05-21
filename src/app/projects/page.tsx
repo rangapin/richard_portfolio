@@ -66,7 +66,7 @@ export default function Projects() {
           <h2 className="text-sm font-semibold tracking-widest text-zinc-400 uppercase dark:text-zinc-500">
             GTM &amp; Outbound
           </h2>
-          <ul className="mt-5 space-y-6">
+          <ul role="list" className="mt-5 space-y-6">
             {gtmProjects.map((project) => (
               <ProjectItem key={project.name} project={project} />
             ))}
@@ -76,7 +76,7 @@ export default function Projects() {
           <h2 className="text-sm font-semibold tracking-widest text-zinc-400 uppercase dark:text-zinc-500">
             Tools &amp; Code
           </h2>
-          <ul className="mt-5 space-y-6">
+          <ul role="list" className="mt-5 space-y-6">
             {techProjects.map((project) => (
               <ProjectItem key={project.name} project={project} />
             ))}

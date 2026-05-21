@@ -13,7 +13,7 @@ function ToolsSection({
       <h2 className="text-sm font-semibold tracking-widest text-zinc-400 uppercase dark:text-zinc-500">
         {title}
       </h2>
-      <ul className="mt-5 space-y-6">{children}</ul>
+      <ul role="list" className="mt-5 space-y-6">{children}</ul>
     </section>
   )
 }
