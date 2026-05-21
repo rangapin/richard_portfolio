@@ -18,6 +18,15 @@ export const metadata: Metadata = {
   },
   description:
     "I'm Richard, a GTM engineer and founder based in Gdynia, Poland. I build the outbound infrastructure that turns raw data into pipeline — enrichment workflows, sequencing systems, and the API integrations that help B2B teams reach the right people at the right time.",
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
   alternates: {
     types: {
       'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
