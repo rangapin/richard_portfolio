@@ -1,49 +1,9 @@
 import { type Metadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import clsx from 'clsx'
 
-import { Container } from '@/components/Container'
-import {
-  GitHubIcon,
-  LinkedInIcon,
-} from '@/components/SocialIcons'
-import portraitImage from '@/images/portrait.jpg'
+import { PageLayout } from '@/components/PageLayout'
+import { Prose } from '@/components/Prose'
+import { TextLink } from '@/components/TextLink'
 
-function SocialLink({
-  className,
-  href,
-  children,
-  icon: Icon,
-}: {
-  className?: string
-  href: string
-  icon: React.ComponentType<{ className?: string }>
-  children: React.ReactNode
-}) {
-  return (
-    <li className={clsx(className, 'flex')}>
-      <Link
-        href={href}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
-      >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
-        <span className="ml-4">{children}</span>
-      </Link>
-    </li>
-  )
-}
-
-function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        fillRule="evenodd"
-        d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
-      />
-    </svg>
-  )
-}
 
 export const metadata: Metadata = {
   title: 'About',
@@ -53,23 +13,11 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <Container className="mt-16 sm:mt-32">
-      <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
-        <div className="lg:pl-20">
-          <div className="max-w-xs px-2.5 lg:max-w-none">
-            <Image
-              src={portraitImage}
-              alt=""
-              sizes="(min-width: 1024px) 32rem, 20rem"
-              className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
-            />
-          </div>
-        </div>
-        <div className="lg:order-first lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            I'm Richard. I build GTM systems, and I got here the hard way.
-          </h1>
-          <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+    <PageLayout backHref="/" backLabel="Richard Angapin">
+      <h1 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+        I&apos;m Richard. I build GTM systems, and I got here the hard way.
+      </h1>
+      <Prose className="mt-8">
             <p>
               My name is Richard. I spent fifteen years in customer support —
               gaming, SaaS, high-pressure environments where you learn to solve
@@ -147,30 +95,45 @@ export default function About() {
               I&apos;m not done learning. But I&apos;m no longer lost, and
               that&apos;s worth more than any degree.
             </p>
-          </div>
-        </div>
-        <div className="lg:pl-20">
-          <ul role="list">
-            <SocialLink href="https://github.com/rangapin" icon={GitHubIcon}>
-              Follow on GitHub
-            </SocialLink>
-            <SocialLink
-              href="https://www.linkedin.com/in/rangapin/"
-              icon={LinkedInIcon}
-              className="mt-4"
-            >
-              Follow on LinkedIn
-            </SocialLink>
-            <SocialLink
-              href="mailto:richard.angapin@outlook.com"
-              icon={MailIcon}
-              className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
-            >
-              richard.angapin@outlook.com
-            </SocialLink>
-          </ul>
-        </div>
-      </div>
-    </Container>
+      </Prose>
+
+      <h2 className="mt-16 text-sm font-semibold tracking-widest text-zinc-400 uppercase dark:text-zinc-500">
+        Work
+      </h2>
+      <ul className="mt-5 space-y-2.5 text-sm text-zinc-600 dark:text-zinc-400">
+        <li className="flex justify-between gap-4">
+          <span className="text-zinc-900 dark:text-zinc-100">Quable</span>
+          <span>2023 — 2025</span>
+        </li>
+        <li className="flex justify-between gap-4">
+          <span className="text-zinc-900 dark:text-zinc-100">ROI Hunter</span>
+          <span>2022</span>
+        </li>
+        <li className="flex justify-between gap-4">
+          <span className="text-zinc-900 dark:text-zinc-100">
+            Run It Once Poker
+          </span>
+          <span>2019 — 2022</span>
+        </li>
+        <li className="flex justify-between gap-4">
+          <span className="text-zinc-900 dark:text-zinc-100">PokerStars</span>
+          <span>2010 — 2019</span>
+        </li>
+      </ul>
+
+      <p className="mt-12 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+        Find me on{' '}
+        <TextLink href="https://github.com/rangapin">GitHub</TextLink> and{' '}
+        <TextLink href="https://www.linkedin.com/in/rangapin/">
+          LinkedIn
+        </TextLink>
+        , email{' '}
+        <TextLink href="mailto:richard.angapin@outlook.com">
+          richard.angapin@outlook.com
+        </TextLink>
+        , or download my{' '}
+        <TextLink href="/richard.angapin_gtm.pdf">CV</TextLink>.
+      </p>
+    </PageLayout>
   )
 }
