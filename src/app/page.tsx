@@ -8,23 +8,38 @@ export const metadata: Metadata = {
     'Richard Angapin - Builder of AI systems, founder, and amateur freediver',
 }
 
-const projects = [
-  { name: 'HackerScope AI', href: '/projects/hackerscope-ai' },
-  { name: 'Achilleus', href: '/projects/achilleus' },
+const projectGroups = [
   {
-    name: 'BODACC iGaming Signal Workflow',
-    href: '/projects/bodacc-igaming-signal-workflow',
+    label: 'Apps & products',
+    projects: [
+      { name: 'HackerScope AI', href: '/projects/hackerscope-ai' },
+      { name: 'Achilleus', href: '/projects/achilleus' },
+      { name: 'The Line', href: '/projects/the-line' },
+    ],
   },
   {
-    name: 'E-commerce Lead Generation Pipeline',
-    href: '/projects/ecommerce-lead-generation-pipeline',
+    label: 'Clay & GTM workflows',
+    projects: [
+      {
+        name: 'BODACC iGaming Signal Workflow',
+        href: '/projects/bodacc-igaming-signal-workflow',
+      },
+      {
+        name: 'E-commerce Lead Generation Pipeline',
+        href: '/projects/ecommerce-lead-generation-pipeline',
+      },
+      {
+        name: 'MPC Recruitment Outbound System',
+        href: '/projects/mpc-recruitment-outbound-system',
+      },
+    ],
   },
   {
-    name: 'MPC Recruitment Outbound System',
-    href: '/projects/mpc-recruitment-outbound-system',
+    label: 'Tools',
+    projects: [
+      { name: 'Security Lead Scorer', href: '/projects/security-lead-scorer' },
+    ],
   },
-  { name: 'Security Lead Scorer', href: '/projects/security-lead-scorer' },
-  { name: 'The Line', href: '/projects/the-line' },
 ]
 
 export default function Home() {
@@ -50,17 +65,25 @@ export default function Home() {
           amateur freediver.
         </p>
         <p>Some things I&apos;ve built:</p>
-        <ul className="list-[square] space-y-2 pl-5 marker:text-zinc-400 dark:marker:text-zinc-600">
-          {projects.map((project) => (
-            <li key={project.href}>
-              <TextLink href={project.href}>{project.name}</TextLink>
-            </li>
+        <div className="space-y-5">
+          {projectGroups.map((group) => (
+            <div key={group.label}>
+              <h2 className="text-xs font-semibold tracking-widest text-zinc-400 uppercase dark:text-zinc-500">
+                {group.label}
+              </h2>
+              <ul className="mt-2 list-[square] space-y-2 pl-5 marker:text-zinc-400 dark:marker:text-zinc-600">
+                {group.projects.map((project) => (
+                  <li key={project.href}>
+                    <TextLink href={project.href}>{project.name}</TextLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
         <p>
-          You can <TextLink href="/articles">read my writing</TextLink>, see{' '}
-          <TextLink href="/uses">what I use</TextLink>, or find me on{' '}
-          <TextLink href="https://github.com/rangapin">GitHub</TextLink> and{' '}
+          You can see <TextLink href="/uses">what I use</TextLink>, or find me
+          on <TextLink href="https://github.com/rangapin">GitHub</TextLink> and{' '}
           <TextLink href="https://www.linkedin.com/in/rangapin/">
             LinkedIn
           </TextLink>

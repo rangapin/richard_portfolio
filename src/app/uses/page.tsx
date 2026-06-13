@@ -108,6 +108,11 @@ export default function Uses() {
           </Tool>
         </ToolsSection>
         <ToolsSection title="Productivity">
+          <Tool title="Wispr Flow" href="https://wisprflow.ai/">
+            AI voice dictation that lets me talk instead of type across every
+            app. Faster than the keyboard for drafting, and it cleans up filler
+            and false starts as it goes.
+          </Tool>
           <Tool title="Notion">
             Where everything lives — product roadmap, research notes, outbound
             sequences. Flexible enough to not get in the way.
