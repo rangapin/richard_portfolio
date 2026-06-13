@@ -34,7 +34,7 @@ const techProjects = [
   {
     name: 'Achilleus',
     description:
-      'A SaaS security-monitoring product for web agencies. It monitored agency-managed sites for security issues, with go-to-market driven by a signal-based Clay enrichment pipeline. Built with Laravel, Next.js, and Claude Code.',
+      'A SaaS security-monitoring product for web agencies. It monitored agency-managed sites for security issues so problems could be caught before clients noticed them. Built with Laravel, Next.js, and Claude Code.',
     link: { href: '/projects/achilleus', label: 'Case study' },
   },
   {
