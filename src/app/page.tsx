@@ -4,10 +4,13 @@ import { PageLayout } from '@/components/PageLayout'
 import { TextLink } from '@/components/TextLink'
 
 export const metadata: Metadata = {
-  title: 'Richard Angapin - GTM Engineer, founder, and amateur freediver',
+  title:
+    'Richard Angapin - Builder of AI systems, founder, and amateur freediver',
 }
 
 const projects = [
+  { name: 'HackerScope AI', href: '/projects/hackerscope-ai' },
+  { name: 'Achilleus', href: '/projects/achilleus' },
   {
     name: 'BODACC iGaming Signal Workflow',
     href: '/projects/bodacc-igaming-signal-workflow',
@@ -32,15 +35,17 @@ export default function Home() {
       </h1>
       <div className="mt-6 space-y-6 text-base leading-7 text-zinc-800 dark:text-zinc-300">
         <p>
-          I&apos;m a GTM engineer and founder based in Gdynia, Poland. I build
-          the outbound infrastructure that turns raw data into pipeline —
-          enrichment workflows, sequencing systems, and the API integrations
-          that help B2B teams reach the right people.
+          I&apos;m a builder of AI systems and automation infrastructure, based
+          in Gdynia, Poland. I design and ship products and internal tools that
+          turn messy inputs into reliable output — chaining APIs, AI models, and
+          data pipelines into systems that run on their own. My work spans AI
+          research tools, security tooling, and go-to-market automation.
         </p>
         <p>
-          Before GTM, I spent fifteen years in customer support across online
-          gaming and SaaS. I taught myself to build, then taught myself to take
-          what I&apos;d built to market. That&apos;s{' '}
+          Before this, I spent fifteen years in customer support across online
+          gaming and SaaS — high-pressure environments where you solve problems
+          fast or things break. I taught myself to build, then to take what
+          I&apos;d built to market. That&apos;s{' '}
           <TextLink href="/about">the longer story</TextLink>. I&apos;m also an
           amateur freediver.
         </p>

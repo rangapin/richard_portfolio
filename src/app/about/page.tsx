@@ -8,14 +8,15 @@ import { TextLink } from '@/components/TextLink'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    "I'm Richard Angapin. GTM engineer, founder, and someone who figured out what they wanted to do by actually doing it.",
+    "I'm Richard Angapin. I build AI systems and automation infrastructure, and I figured out what I wanted to do by actually doing it.",
 }
 
 export default function About() {
   return (
     <PageLayout backHref="/" backLabel="Richard Angapin">
       <h1 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-        I&apos;m Richard. I build GTM systems, and I got here the hard way.
+        I&apos;m Richard. I build AI systems and automation, and I got here the
+        hard way.
       </h1>
       <Prose className="mt-8">
             <p>
@@ -37,12 +38,15 @@ export default function About() {
             </p>
             <p>
               I&apos;d stumbled into a field I didn&apos;t know existed. GTM
-              engineering as a formal role is only a few years old, but it sits
-              exactly at the intersection of where I&apos;d spent my career —
-              technical enough to build, customer-facing enough to understand
-              what actually matters. And the more I got exposed to the
-              community, to what the best practitioners were actually building,
-              the more I felt something I can only describe as genuine obsession.
+              engineering as a formal role is only a few years old, but what
+              hooked me wasn&apos;t the label — it was that it sat exactly at the
+              intersection of where I&apos;d spent my career: technical enough to
+              build, customer-facing enough to understand what actually matters.
+              It became the place where I learned to ship real systems and take
+              them to market. The more I saw what the best practitioners were
+              building, the more I felt something I can only describe as genuine
+              obsession — not with a job title, but with building things that
+              work.
             </p>
             <p>
               So I enrolled in the Clay bootcamp. It wasn&apos;t cheap, and I
@@ -79,10 +83,11 @@ export default function About() {
             </p>
             <p>
               A funny footnote: the Claude Code skills I&apos;d written off as
-              a detour turned out to be genuinely useful in GTM. The field
-              rewards people who can move across the stack, and it turns out the
-              tech person who pivoted into GTM is exactly the profile the market
-              is looking for.
+              a detour turned out to be the most durable thing I picked up. The
+              work rewards people who can move across the stack — read a
+              codebase, wire up APIs, automate the boring parts, and still talk
+              to the human on the other end. That turned out to be the
+              throughline, whatever job title sits on top of it.
             </p>
             <p>
               The bootcamp was expensive. I&apos;d make the same choice again

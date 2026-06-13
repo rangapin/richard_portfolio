@@ -1,0 +1,37 @@
+import { ProjectLayout } from '@/components/ProjectLayout'
+
+export const project = {
+  title: 'HackerScope AI',
+  description:
+    'An AI-powered startup research and validation platform. It runs AI-assisted research workflows that turn market signals into structured business ideas, chaining multiple APIs and AI systems to automate research, analysis, and content generation.',
+  link: 'https://www.hackerscope.ai',
+}
+
+export const metadata = {
+  title: project.title,
+  description: project.description,
+}
+
+export default (props) => <ProjectLayout project={project} {...props} />
+
+## What it does
+
+HackerScope AI is a startup research and validation platform. It takes market signals and turns them into structured business ideas you can actually evaluate, running the research, analysis, and write-up steps that would otherwise be done by hand.
+
+The core is a set of AI-assisted research workflows. Each one chains several APIs and AI systems together, so a single request moves through gathering signals, analysing them, and generating the written output without manual hand-offs between steps.
+
+## How it's built
+
+The workflows sit on top of a few services, each doing one job:
+
+- **Claude (Anthropic API)** handles the analysis and content generation.
+- **Exa** pulls the market signals and source material the research runs on.
+- **Supabase** stores the data and handles auth.
+- **Stripe** handles billing.
+- **Next.js** is the application layer that ties it together.
+
+What makes it more than a single prompt is the chaining: research, analysis, and content generation are separate stages wired into one workflow, so raw signals come in one end and a structured idea comes out the other.
+
+## Status
+
+HackerScope AI is a personal product I built and shipped, and I'm keeping it live for now.

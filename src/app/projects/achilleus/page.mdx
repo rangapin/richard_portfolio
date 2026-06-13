@@ -1,0 +1,32 @@
+import { ProjectLayout } from '@/components/ProjectLayout'
+
+export const project = {
+  title: 'Achilleus',
+  description:
+    'A SaaS security-monitoring product for web agencies. It monitored agency-managed sites for security issues, with go-to-market driven by a signal-based Clay enrichment pipeline.',
+}
+
+export const metadata = {
+  title: project.title,
+  description: project.description,
+}
+
+export default (props) => <ProjectLayout project={project} {...props} />
+
+## What it does
+
+Achilleus is a SaaS security-monitoring product aimed at web agencies. It monitored the sites an agency manages for security issues, so problems could be caught on the agency's side rather than surfacing on a client's live site.
+
+## Go-to-market
+
+The go-to-market ran on a signal-based Clay enrichment pipeline. Rather than blanket outreach, the pipeline used signals to identify and enrich the agencies worth contacting, so outbound was driven by fit instead of volume.
+
+## Stack
+
+Laravel on the backend, Next.js on the front, and Claude Code as part of how it was built.
+
+## Status
+
+Achilleus is a build I'm keeping live for now — a product I made, not a running business.
+
+{/* TODO: confirm whether to add a `link` (live URL or GitHub repo). Left out until verified the deployment is up and the core flow loads. */}
