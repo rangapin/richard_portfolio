@@ -12,8 +12,6 @@ const projectGroups = [
   {
     label: 'Apps & products',
     projects: [
-      { name: 'HackerScope AI', href: '/projects/hackerscope-ai' },
-      { name: 'Achilleus', href: '/projects/achilleus' },
       { name: 'The Line', href: '/projects/the-line' },
     ],
   },

@@ -26,18 +26,6 @@ const gtmProjects = [
 
 const techProjects = [
   {
-    name: 'HackerScope AI',
-    description:
-      'An AI-powered startup research and validation platform. AI-assisted research workflows turn market signals into structured business ideas, chaining multiple APIs and AI systems to automate research, analysis, and content generation. Built with Next.js, Supabase, Claude, Exa, and Stripe.',
-    link: { href: '/projects/hackerscope-ai', label: 'Case study' },
-  },
-  {
-    name: 'Achilleus',
-    description:
-      'A SaaS security-monitoring product for web agencies. It monitored agency-managed sites for security issues so problems could be caught before clients noticed them. Built with Laravel, Next.js, and Claude Code.',
-    link: { href: '/projects/achilleus', label: 'Case study' },
-  },
-  {
     name: 'Security Lead Scorer',
     description:
       'Python CLI tool that scans domains for SSL issues, missing security headers, and DNS misconfigurations, then scores them 0–100 by security posture. Higher score = worse security = better prospect. Generates talking points for outreach automatically.',
